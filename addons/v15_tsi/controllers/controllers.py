@@ -288,34 +288,129 @@ class RestApiTsi(http.Controller):
             )     
                 
 
-    @http.route('/api/get_schedule_auditor', csrf=False, type='http', auth='none', methods=['GET'],cors='*')
+    @http.route('/api/get_schedule_auditor_ict', csrf=False, type='http', auth='none', methods=['GET'],cors='*')
     @token_required
-    def get_schedule_auditor(self, **kwargs):
+    def get_schedule_auditor_ict(self, **kwargs):
         programs = request.env['ops.program'].sudo().search([])
         program_lines_data = []
         for program in programs:
             customer_name = program.customer.name if program.customer else ''
             iso_standard = ', '.join(program.iso_standard_ids.mapped('name')) if program.iso_standard_ids else ''
             for line in program.program_lines_aktual:
-                date_start_str = line.date_start.strftime('%d-%m-%Y') if isinstance(line.date_start, date) else ''
-                date_end_str = line.date_end.strftime('%d-%m-%Y') if isinstance(line.date_end, date) else ''
                 lead_auditor = line.lead_auditor.name if line.lead_auditor else ''
                 auditor = line.auditor.name if line.auditor else ''
                 auditor_2 = line.auditor_2.name if line.auditor_2 else ''
                 auditor_3 = line.auditor_3.name if line.auditor_3 else ''
-                program_lines_data.append({
-                    'customer': customer_name,
-                    'iso_standard': iso_standard,
-                    'lead_auditor': lead_auditor,
-                    'auditor': [auditor,auditor_2,auditor_3],
-                    'date_start': date_start_str,
-                    'date_end': date_end_str,
-                })
+                
+                divisi = request.env['hr.employee'].sudo().search([('id','=',line.lead_auditor.id)])
+                if divisi.department_id.id == 15:
+                    date_start_str = line.date_start.strftime('%d-%m-%Y') if isinstance(line.date_start, date) else ''
+                    date_end_str = line.date_end.strftime('%d-%m-%Y') if isinstance(line.date_end, date) else ''
+                    
+                    program_lines_data.append({
+                        'customer': customer_name,
+                        'iso_standard': iso_standard,
+                        'lead_auditor': lead_auditor,
+                        'auditor': [auditor,auditor_2,auditor_3],
+                        'date_start': date_start_str,
+                        'date_end': date_end_str,
+                        'divisi_id': 15,
+                    })
 
         response = request.make_response(json.dumps(program_lines_data), headers={'Content-Type': 'application/json'})
         return self.set_cors_headers(response)
-    @http.route('/api/get_schedule_auditor', csrf=False, type='http', auth='none', methods=['OPTIONS'],cors='*')
-    def options_get_schedule_auditor(self, **kw):
+    @http.route('/api/get_schedule_auditor_ict', csrf=False, type='http', auth='none', methods=['OPTIONS'],cors='*')
+    def options_get_schedule_auditor_ict(self, **kw):
+        headers = {
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, access_token',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS'
+        }
+        return werkzeug.wrappers.Response(
+            status=200,
+            content_type='application/json',
+            response='',
+            headers=headers
+        )
+        
+    @http.route('/api/get_schedule_auditor_xms', csrf=False, type='http', auth='none', methods=['GET'],cors='*')
+    @token_required
+    def get_schedule_auditor_xms(self, **kwargs):
+        programs = request.env['ops.program'].sudo().search([])
+        program_lines_data = []
+        for program in programs:
+            customer_name = program.customer.name if program.customer else ''
+            iso_standard = ', '.join(program.iso_standard_ids.mapped('name')) if program.iso_standard_ids else ''
+            for line in program.program_lines_aktual:
+                lead_auditor = line.lead_auditor.name if line.lead_auditor else ''
+                auditor = line.auditor.name if line.auditor else ''
+                auditor_2 = line.auditor_2.name if line.auditor_2 else ''
+                auditor_3 = line.auditor_3.name if line.auditor_3 else ''
+                
+                divisi = request.env['hr.employee'].sudo().search([('id','=',line.lead_auditor.id)])
+                if divisi.department_id.id == 36:
+                    date_start_str = line.date_start.strftime('%d-%m-%Y') if isinstance(line.date_start, date) else ''
+                    date_end_str = line.date_end.strftime('%d-%m-%Y') if isinstance(line.date_end, date) else ''
+                    
+                    program_lines_data.append({
+                        'customer': customer_name,
+                        'iso_standard': iso_standard,
+                        'lead_auditor': lead_auditor,
+                        'auditor': [auditor,auditor_2,auditor_3],
+                        'date_start': date_start_str,
+                        'date_end': date_end_str,
+                        'divisi_id': 36,
+                    })
+
+        response = request.make_response(json.dumps(program_lines_data), headers={'Content-Type': 'application/json'})
+        return self.set_cors_headers(response)
+    @http.route('/api/get_schedule_auditor_xms', csrf=False, type='http', auth='none', methods=['OPTIONS'],cors='*')
+    def options_get_schedule_auditor_xms(self, **kw):
+        headers = {
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, access_token',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS'
+        }
+        return werkzeug.wrappers.Response(
+            status=200,
+            content_type='application/json',
+            response='',
+            headers=headers
+        )
+        
+    @http.route('/api/get_schedule_auditor_sustain', csrf=False, type='http', auth='none', methods=['GET'],cors='*')
+    @token_required
+    def get_schedule_auditor_sustain(self, **kwargs):
+        programs = request.env['ops.program'].sudo().search([])
+        program_lines_data = []
+        for program in programs:
+            customer_name = program.customer.name if program.customer else ''
+            iso_standard = ', '.join(program.iso_standard_ids.mapped('name')) if program.iso_standard_ids else ''
+            for line in program.program_lines_aktual:
+                lead_auditor = line.lead_auditor.name if line.lead_auditor else ''
+                auditor = line.auditor.name if line.auditor else ''
+                auditor_2 = line.auditor_2.name if line.auditor_2 else ''
+                auditor_3 = line.auditor_3.name if line.auditor_3 else ''
+                
+                divisi = request.env['hr.employee'].sudo().search([('id','=',line.lead_auditor.id)])
+                if divisi.department_id.id == 16:
+                    date_start_str = line.date_start.strftime('%d-%m-%Y') if isinstance(line.date_start, date) else ''
+                    date_end_str = line.date_end.strftime('%d-%m-%Y') if isinstance(line.date_end, date) else ''
+                    
+                    program_lines_data.append({
+                        'customer': customer_name,
+                        'iso_standard': iso_standard,
+                        'lead_auditor': lead_auditor,
+                        'auditor': [auditor,auditor_2,auditor_3],
+                        'date_start': date_start_str,
+                        'date_end': date_end_str,
+                        'divisi_id': 16,
+                    })
+
+        response = request.make_response(json.dumps(program_lines_data), headers={'Content-Type': 'application/json'})
+        return self.set_cors_headers(response)
+    @http.route('/api/get_schedule_auditor_sustain', csrf=False, type='http', auth='none', methods=['OPTIONS'],cors='*')
+    def options_get_schedule_auditor_sustain(self, **kw):
         headers = {
             'Access-Control-Allow-Headers': 'Content-Type, Authorization, access_token',
             'Access-Control-Allow-Origin': '*',
@@ -329,16 +424,21 @@ class RestApiTsi(http.Controller):
         )
         
         
-    @http.route('/api/get_all_auditor', csrf=False, type='http', auth='none', methods=['GET'],cors='*')
+    @http.route('/api/get_all_auditor_ict', csrf=False, type='http', auth='none', methods=['GET'],cors='*')
     @token_required
-    def get_all_auditor(self, **kwargs):
-        data = request.env['hr.employee'].sudo().search([('department_id',"=",[15,16,36]),('id','!=',[89,319,144,320,340,118,119])])
-        all_auditor = data.read(['name']) 
+    def get_all_auditor_ict(self, **kwargs):
+        data = request.env['hr.employee'].sudo().search([('auditor',"=","Yes"),('department_id',"=",15)])
+        all_auditor = []
+        for emp in data:
+            all_auditor.append({
+                'name': emp.name,
+                'divisi_id': emp.department_id.id
+            })
 
         response = request.make_response(json.dumps(all_auditor), headers={'Content-Type': 'application/json'})
         return self.set_cors_headers(response)
-    @http.route('/api/get_all_auditor', csrf=False, type='http', auth='none', methods=['OPTIONS'],cors='*')
-    def options_get_all_auditor(self, **kw):
+    @http.route('/api/get_all_auditor_ict', csrf=False, type='http', auth='none', methods=['OPTIONS'],cors='*')
+    def options_get_all_auditor_ict(self, **kw):
         headers = {
             'Access-Control-Allow-Headers': 'Content-Type, Authorization, access_token',
             'Access-Control-Allow-Origin': '*',
@@ -351,7 +451,60 @@ class RestApiTsi(http.Controller):
             headers=headers
         )
         
+    @http.route('/api/get_all_auditor_xms', csrf=False, type='http', auth='none', methods=['GET'],cors='*')
+    @token_required
+    def get_all_auditor_xms(self, **kwargs):
+        data = request.env['hr.employee'].sudo().search([('auditor',"=","Yes"),('department_id',"=",36)])
+        all_auditor = []
+        for emp in data:
+            all_auditor.append({
+                'name': emp.name,
+                'divisi_id': emp.department_id.id
+            }) 
 
+        response = request.make_response(json.dumps(all_auditor), headers={'Content-Type': 'application/json'})
+        return self.set_cors_headers(response)
+    @http.route('/api/get_all_auditor_xms', csrf=False, type='http', auth='none', methods=['OPTIONS'],cors='*')
+    def options_get_all_auditor_xms(self, **kw):
+        headers = {
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, access_token',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS'
+        }
+        return werkzeug.wrappers.Response(
+            status=200,
+            content_type='application/json',
+            response='',
+            headers=headers
+        )
+        
+    @http.route('/api/get_all_auditor_sustain', csrf=False, type='http', auth='none', methods=['GET'],cors='*')
+    @token_required
+    def get_all_auditor_sustain(self, **kwargs):
+        data = request.env['hr.employee'].sudo().search([('auditor',"=","Yes"),('department_id',"=",16)])
+        all_auditor = []
+        for emp in data:
+            all_auditor.append({
+                'name': emp.name,
+                'divisi_id': emp.department_id.id
+            })
+
+        response = request.make_response(json.dumps(all_auditor), headers={'Content-Type': 'application/json'})
+        return self.set_cors_headers(response)
+    @http.route('/api/get_all_auditor_sustain', csrf=False, type='http', auth='none', methods=['OPTIONS'],cors='*')
+    def options_get_all_auditor_sustain(self, **kw):
+        headers = {
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, access_token',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS'
+        }
+        return werkzeug.wrappers.Response(
+            status=200,
+            content_type='application/json',
+            response='',
+            headers=headers
+        )
+        
     @http.route('/api/get_status_auditor', csrf=False, type='http', auth='none', methods=['GET'],cors='*')
     @token_required
     def get_status_auditor(self, **kwargs):

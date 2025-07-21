@@ -1,0 +1,267 @@
+<odoo>
+    <data>
+        <!-- Action OWS CRM -->
+        <record id="tsi_ows_action" model="ir.actions.act_window">
+            <field name="name">OWS</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.ows</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="search_view_id" ref="tsi_ows_search"/>
+            <field name="context">{'search_default_tahun_ini': 1}</field>
+        </record>
+
+        <!--Search OWS-->
+        <record id="tsi_ows_search" model="ir.ui.view">
+			<field name="name">tsi.ows.view.search</field>
+			<field name="model">tsi.ows</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+				<search string="OWS Filter">
+                    <!-- <field name="no_sertifikat" /> -->
+                    <field name="nama_client" />
+                    
+                    <field name="scope" />
+                    <field name="sales_person" />
+                    <field name="standard" />
+                    <field name="last_tahapan_audit" />
+                    <field name="tahapan_audit" />
+
+                    <field name="ea_code" widget="many2many_tags" />
+                    <field name="status_klien" />
+                    <field name="tgl_sertifikat" />
+
+                    <field name="last_audit" />
+                    <field name="tgl_kontrak" />
+
+                    <field name="mandays" sum="Mandays :"/>
+                    <!-- <field name="mandays_next_year" sum="Mandays Next Year :"/>
+                    <field name="mandays_next2_year" sum="Mandays Next 2 Year :"/> -->
+
+                    <field name="request_end" />
+                    <field name="actual_start_date" />
+                    <field name="actual_end_date" />
+
+                    <field name="close_won_date" />
+                    <field name="revenue" />
+
+                    <field name="revenue_next_year" />
+                    <field name="revenue_next2_year" />
+
+                    <field name="tahun" />
+                    <filter name="tahun_ini" string="Tahun Ini"
+                        domain="[('close_won_date', '&gt;=', '2025-01-01'), ('close_won_date', '&lt;=', '2025-12-31')]" />
+				</search>
+			</field>
+		</record>
+
+        <!-- View tree OWS -->
+        <record id="tsi_ows_view_tree" model="ir.ui.view">
+            <field name="name">tsi.ows.view.tree</field>
+            <field name="model">tsi.ows</field>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name="no_sertifikat" />
+                    <field name="nama_client" />
+                    <field name="scope" />
+                    <field name="sales_person" />
+                    <field name="standard" />
+                    <field name="last_tahapan_audit" />
+                    <field name="tahapan_audit" />
+                    <field name="ea_code" widget="many2many_tags" />
+                    <field name="status_klien" />
+                    <field name="tgl_sertifikat" />
+                    <field name="last_audit" />
+                    <field name="tgl_kontrak" />
+                    <field name="mandays" />
+                    <!-- <field name="mandays_next_year" />
+                    <field name="mandays_next2_year" /> -->
+
+                    <field name="request_end" />
+                    <field name="actual_start_date" />
+                    <field name="actual_end_date" />
+                    <field name="revenue" sum="Total Revenue: "/>
+
+                    <field name="revenue_next_year" sum="Total Revenue Next Year: "/>
+                    <field name="revenue_next2_year" sum="Total Revenue Next 2 Year: "/>
+                </tree>
+            </field>
+        </record>
+
+        <!--View form OWS-->
+        <record id="tsi_ows_view_form" model="ir.ui.view">
+            <field name="name">tsi.ows.view.form</field>
+            <field name="model">tsi.ows</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="false">
+                    <group>
+                        <field name="no_sertifikat" />
+                        <field name="nama_client" />
+                        <field name="scope" />
+                        <field name="sales_person" />
+                        <field name="standard" />
+                        <field name="last_tahapan_audit" />
+                        <field name="tahapan_audit" />
+                        <field name="ea_code" widget="many2many_tags" />
+                        <field name="status_klien" />
+                        <field name="tgl_sertifikat"/>
+                        <field name="last_audit"/>
+                        <field name="tgl_kontrak"/>
+                        <field name="mandays" />
+
+                        <!-- <field name="mandays_next_year" />
+                        <field name="mandays_next2_year" /> -->
+
+                        <!-- <field name="request_start" invisible="1"/>
+                        <field name="request_start_str" /> -->
+
+                        <field name="request_end" />
+                        <field name="actual_start_date" />
+                        <field name="actual_end_date" />
+                        <field name="revenue" />
+
+                        <field name="revenue_next_year" />
+                        <field name="revenue_next2_year" />
+                    </group>
+                    <group string="Reference">
+                        <field name="ops_reference" />
+                        <field name="ops_program_reference" />
+                        <field name="ops_plan_reference" />
+                        <field name="ops_report_reference" />
+                        <field name="ops_sertifikat_reference" />
+                        <field name="iso_reference" />
+                        <field name="sales_order_reference" />
+
+                        <field name="crm_reference" />
+                        <field name="audit_request_reference" />
+                        <field name="review_reference" />
+                    </group>
+			    </form>
+            </field>
+        </record>
+
+        <record id="tsi_ows_view_grafik_revenue" model="ir.ui.view">
+            <field name="name">tsi.ows.view.grafik.revenue</field>
+            <field name="model">tsi.ows</field>
+            <field name="arch" type="xml">
+                <graph string="Revenvue">
+                    <field name="tgl_sertifikat" type="row"/>
+                    <!-- <field name="tahun" type="row"/> -->
+                    <!-- <field name="prediksi_revenue" type="col"/> -->
+                    <field name="revenue" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action Grafik Revenue -->
+        <record id="tsi_ows_action_grafik_revenue" model="ir.actions.act_window">
+            <field name="name">Grafik Revenue</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.ows</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="tsi_ows_view_grafik_revenue"/>
+            <!-- <field name="domain">[("prediksi_revenue","=","real"),("tahun", "!=", False),("revenue", "!=", 0)]</field> -->
+        </record>
+        
+        <record id="tsi_ows_view_grafik_revenue_prediction" model="ir.ui.view">
+            <field name="name">tsi.ows.view.grafik.revenue.prediction</field>
+            <field name="model">tsi.ows</field>
+            <field name="arch" type="xml">
+                <graph string="Revenvue Prediction">
+                    <field name="tahun" type="row"/>
+                    <field name="prediksi_revenue" type="col"/>
+                    <field name="revenue_next_year" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action Grafik Revenue Prediction -->
+        <record id="tsi_ows_action_grafik_revenue_prediction" model="ir.actions.act_window">
+            <field name="name">Grafik Revenue Prediction</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.ows</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="tsi_ows_view_grafik_revenue_prediction"/>
+            <field name="domain">[("prediksi_revenue","=","prediction"),("tahun", "!=", False),("revenue_next_year", "!=", 0)]</field>
+        </record>
+
+        
+        <record id="tsi_ows_view_grafik_mandays" model="ir.ui.view">
+            <field name="name">tsi.ows.view.grafik.mandays</field>
+            <field name="model">tsi.ows</field>
+            <field name="arch" type="xml">
+                <graph string="Mandays">
+                    <field name="actual_start_date" type="row"/>
+                    <!-- <field name="mandays_float" type="col"/> -->
+                    <field name="mandays" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action Grafik Mandays -->
+        <record id="tsi_ows_action_grafik_mandays" model="ir.actions.act_window">
+            <field name="name">Grafik Mandays</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.ows</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="tsi_ows_view_grafik_mandays"/>
+        </record>
+
+        
+        <record id="tsi_ows_view_grafik_tahapan_audit" model="ir.ui.view">
+            <field name="name">tsi.ows.view.grafik.tahapan.audit</field>
+            <field name="model">tsi.ows</field>
+            <field name="arch" type="xml">
+                <graph string="Tahapan Audit">
+                    <field name="actual_start_date" type="row"/>
+                    <field name="tahapan_audit" type="col"/>
+                    <!-- <field name="tahapan_audit" type="measure"/> -->
+                </graph>
+            </field>
+        </record>
+        <!-- Action Grafik Tahapan Audit -->
+        <record id="tsi_ows_action_grafik_tahapan_audit" model="ir.actions.act_window">
+            <field name="name">Grafik Tahapan Audit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.ows</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="tsi_ows_view_grafik_tahapan_audit"/>
+        </record>
+
+
+        <record id="tsi_ows_view_grafik_close_won" model="ir.ui.view">
+            <field name="name">tsi.ows.view.grafik.close.won</field>
+            <field name="model">tsi.ows</field>
+            <field name="arch" type="xml">
+                <graph string="Close Won">
+                    <field name="close_won_date" type="row"/>
+                    <field name="status_close_won" type="col"/>
+                    <field name="revenue" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <record id="tsi_ows_search_graph_view" model="ir.ui.view">
+            <field name="name">tsi.ows.graph.search</field>
+            <field name="model">tsi.ows</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter name="tahun_ini" string="Tahun Ini"
+                            domain="[('close_won_date', '&gt;=', '2025-01-01'), ('close_won_date', '&lt;=', '2025-12-31')]" />
+                    <filter name="tahun_lalu" string="Tahun Lalu"
+                            domain="[('close_won_date', '&gt;=', '2024-01-01'), ('close_won_date', '&lt;=', '2024-12-31')]" />
+                </search>
+            </field>
+        </record>
+
+        <!-- Action Grafik Close won -->
+        <record id="tsi_ows_action_grafik_close_won" model="ir.actions.act_window">
+            <field name="name">Grafik Close Won</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.ows</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="tsi_ows_view_grafik_close_won"/>
+            <field name="search_view_id" ref="tsi_ows_search_graph_view"/>
+            <field name="domain">[("status_close_won", "=", "close_won")]</field>
+            <field name="context">{'search_default_tahun_ini': 1}</field>
+        </record>
+
+
+
+    </data>
+</odoo>

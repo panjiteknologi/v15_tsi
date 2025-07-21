@@ -1,0 +1,14 @@
+<!-- <odoo>
+    <data noupdate="1">
+        <record id="ir_cron_create_new_crm" model="ir.cron">
+            <field name="name">Create Record CRM</field>
+            <field name="model_id" ref="model_tsi_history_kontrak"/>
+            <field name="state">code</field>
+            <field name="code">model.create_new_crm()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo> -->

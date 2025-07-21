@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_check_certificate_status" model="ir.cron">
+            <field name="name">Check Certificate Status</field>
+            <field name="model_id" ref="model_tsi_partner_certificate"/> <!-- Pastikan ini benar -->
+            <field name="state">code</field>
+            <field name="code">model._check_certificates()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field> <!-- Perhatikan huruf kecil pada 'minutes' -->
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>

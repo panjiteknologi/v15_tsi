@@ -1,0 +1,1592 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="wa_interactive_template" model="wa.template">
+            <field name="name">wa_interactive_template</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                            Untuk informasi lebih lanjut, kamu bisa klik menu dibawah sini yah 😉
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template"
+            />
+            <field name="text">
+                Untuk informasi lebih lanjut, kamu bisa klik menu dibawah sini yah 😉
+            </field>
+        </record>
+        <record id="wa_interactive_template_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template"
+            />
+        </record>
+        <record id="wa_interactive_template_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'}),
+                (0, 0, {'title': 'Company Profile'})
+            ]"
+            />
+        </record>
+
+        <!-- Compro -->
+        <record id="wa_interactive_template_compro" model="wa.template">
+            <field name="name">wa_interactive_template_compro</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                            Berikut adalah company profile kami.
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_compro_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_compro"
+            />
+            <field name="text">
+                Berikut adalah company profile kami.
+            </field>
+        </record>
+        <record id="wa_interactive_template_compro_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">document</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_compro"
+            />
+        </record>
+        <record id="wa_interactive_template_compro_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_compro"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+
+        <!-- <record id="wa_interactive_template_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">list</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template"
+            />
+            <field name="interactive_list_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {
+                    'main_title': 'Options',
+                    'title_ids': [
+                        (5, 0, 0),
+                        (0, 0, {'title': 'Standard'}),
+                        (0, 0, {'title': 'New Application Form'}),
+                        (0, 0, {'title': 'Ticket Complain'}),
+                        (0, 0, {'title': 'Rules Using Logo'}),
+                        (0, 0, {'title': 'Talk With Our CS'})  
+                    ]
+                })
+            ]"
+            />
+            <field name="interactive_list_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {
+                    'main_title': 'Options',
+                    'title_ids': [
+                        (5, 0, 0),
+                        (0, 0, {'title': 'Standard'}),
+                        (0, 0, {'title': 'New Application Form'}),
+                        (0, 0, {'title': 'Audit Request Form'}),
+                        (0, 0, {'title': 'Ticket Complain'}),
+                        (0, 0, {'title': 'Rules Using Logo'}),
+                        (0, 0, {'title': 'Talk With Our CS'})  
+                    ]
+                })
+            ]"
+            />
+        </record> -->
+
+        <record id="wa_interactive_template_main_menu" model="wa.template">
+            <field name="name">wa_interactive_template_main_menu</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Main Menu
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_main_menu_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_main_menu"
+            />
+            <field name="text">
+                Main Menu
+            </field>
+        </record>
+        <record id="wa_interactive_template_main_menu_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">list</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_main_menu"
+            />
+            <field name="interactive_list_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {
+                    'main_title': 'Main Menu',
+                    'title_ids': [
+                        (5, 0, 0),
+                        (0, 0, {'title': 'Standard'}),
+                        (0, 0, {'title': 'New Application Form'}),
+                        (0, 0, {'title': 'Ticket Complain'}),
+                        (0, 0, {'title': 'Rules Using Logo'}),
+                        (0, 0, {'title': 'Talk With Our CS'}),  
+                        (0, 0, {'title': 'Company Profile'}),  
+                    ]
+                })
+            ]"
+            />
+            <!-- <field name="interactive_list_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {
+                    'main_title': 'Options',
+                    'title_ids': [
+                        (5, 0, 0),
+                        (0, 0, {'title': 'Standard'}),
+                        (0, 0, {'title': 'New Application Form'}),
+                        (0, 0, {'title': 'Audit Request Form'}),
+                        (0, 0, {'title': 'Ticket Complain'}),
+                        (0, 0, {'title': 'Rules Using Logo'}),
+                        (0, 0, {'title': 'Talk With Our CS'})  
+                    ]
+                })
+            ]"
+            /> -->
+        </record>
+
+        <record id="wa_interactive_template_rules_using_logo" model="wa.template">
+            <field name="name">wa_interactive_template_rules_using_logo</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Rules for Using the Logo
+    Logo ISO : https://tsicertification.com/logo-guidline/
+    Logo ISPO : https://tsicertification.com/logo-guidline-ispo/
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_rules_using_logo_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_rules_using_logo"
+            />
+            <field name="text">
+                Rules for Using the Logo
+Logo ISO : https://tsicertification.com/logo-guidline/
+Logo ISPO : https://tsicertification.com/logo-guidline-ispo/
+            </field>
+        </record>
+        <record id="wa_interactive_template_rules_using_logo_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">list</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_rules_using_logo"
+            />
+            <field name="interactive_list_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {
+                    'main_title': 'Options',
+                    'title_ids': [
+                        (5, 0, 0),
+                        (0, 0, {'title': 'Standard'}),
+                        (0, 0, {'title': 'New Application Form'}),
+                        (0, 0, {'title': 'Ticket Complain'}),
+                        (0, 0, {'title': 'Talk With Our CS'})  
+                    ]
+                })
+            ]"
+            />
+            <!-- <field name="interactive_list_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {
+                    'main_title': 'Options',
+                    'title_ids': [
+                        (5, 0, 0),
+                        (0, 0, {'title': 'Standard'}),
+                        (0, 0, {'title': 'New Application Form'}),
+                        (0, 0, {'title': 'Audit Request Form'}),
+                        (0, 0, {'title': 'Ticket Complain'}),
+                        (0, 0, {'title': 'Talk With Our CS'})  
+                    ]
+                })
+            ]"
+            /> -->
+        </record>
+
+        
+
+        <record id="wa_interactive_template_scope" model="wa.template">
+            <field name="name">wa_interactive_template_scope</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Standard
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope"
+            />
+            <field name="text">
+                Standard
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">list</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope"
+            />
+            <field name="interactive_list_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {
+                    'main_title': 'Standard',
+                    'title_ids': [
+                        (5, 0, 0),
+                        (0, 0, {'title': 'Standard 9001:2015'}),
+                        (0, 0, {'title': 'Standard 14001:2015'}),
+                        (0, 0, {'title': 'Standard 45001:2015'}),
+                        (0, 0, {'title': 'Standard HACCP'}),
+                        (0, 0, {'title': 'Standard 22000:2018'}),
+                        (0, 0, {'title': 'Standard 27001:2022'}),
+                        (0, 0, {'title': 'Standard 20000-1:2018'}),
+                        (0, 0, {'title': 'Standard 21001:2018'}),
+                        (0, 0, {'title': 'See More Standard'}),
+                        (0, 0, {'title': 'Main Menu'})
+                    ]
+                })
+            ]"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_see_more" model="wa.template">
+            <field name="name">wa_interactive_template_scope_see_more</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        See More Standard
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_body_see_more" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_see_more"
+            />
+            <field name="text">
+                See More Standard
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_see_more_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">list</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_see_more"
+            />
+            <field name="interactive_list_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {
+                    'main_title': 'See More Standard',
+                    'title_ids': [
+                        (5, 0, 0),
+                        (0, 0, {'title': 'Standard 37301'}),
+                        (0, 0, {'title': 'Standard 37001'}),
+                        (0, 0, {'title': 'Standard ISPO'}),
+                        (0, 0, {'title': 'Standard ISCC EU'}),
+                        (0, 0, {'title': 'Standard ISCC Plus'}),
+                        (0, 0, {'title': 'New Application Form'}),
+                        (0, 0, {'title': 'Ticket Complain'}),
+                        (0, 0, {'title': 'Rules Using Logo'}),
+                        (0, 0, {'title': 'Talk With Our CS'})
+                    ]
+                })
+            ]"
+            />
+            <!-- <field name="interactive_list_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {
+                    'main_title': 'Options',
+                    'title_ids': [
+                        (5, 0, 0),
+                        (0, 0, {'title': 'Standard 37001'}),
+                        (0, 0, {'title': 'Standard ISPO'}),
+                        (0, 0, {'title': 'Standard ISCC EU'}),
+                        (0, 0, {'title': 'Standard ISCC Plus'}),
+                        (0, 0, {'title': 'New Application Form'}),
+                        (0, 0, {'title': 'Audit Request Form'}),
+                        (0, 0, {'title': 'Ticket Complain'}),
+                        (0, 0, {'title': 'Rules Using Logo'}),
+                        (0, 0, {'title': 'Talk With Our CS'})
+                    ]
+                })
+            ]"
+            /> -->
+        </record>
+
+
+        <record id="wa_interactive_template_scope_9001_2015" model="wa.template">
+            <field name="name">wa_interactive_template_scope_9001_2015</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope 9001:2015 :
+    1. Pertanian, Kehutanan, dan Perikanan (01)
+    2. Pertambangan dan Penggalian (02)
+    3. Produk makanan, minuman dan tembakau (03)
+    4. Bahan kimia, produk kimia dan serat (12)
+    5. Karet dan produk plastik (14)
+    6. Logam dasar dan produk logam fabrikasi (17)
+    7. Mesin dan peralatan (18)
+    8. Kelistrikan dan peralatan optik (19)
+    9. Pabrik lainnya yang tidak diklasifikasikan (23)
+    10. Konstruksi (28)
+    11. Perdagangan grosir dan eceran; Perbaikan kendaraan bermotor, sepeda motor serta barang personal dan rumah tangga (29)
+    12. Hotel dan restoran (30)
+    13. Pengangkutan, penyimpanan, dan komunikas (31)
+    14. Intermediasi keuangan, real estate, penyewaan (32)
+    15. Teknologi informasi (33)
+    16. Jasa rekayasa (34)
+    17. Jasa lainnya (35)
+    18. Administrasi umum (36)
+    19. Pendidikan (37)
+    20. Kesehatan dan tugas sosial(38)
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_9001_2015_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_9001_2015"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_9001_2015_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_9001_2015"
+            />
+            <field name="text">
+                Scope 9001:2015 :
+1. Pertanian, Kehutanan, dan Perikanan (01)
+2. Pertambangan dan Penggalian (02)
+3. Produk makanan, minuman dan tembakau (03)
+4. Bahan kimia, produk kimia dan serat (12)
+5. Karet dan produk plastik (14)
+6. Logam dasar dan produk logam fabrikasi (17)
+7. Mesin dan peralatan (18)
+8. Kelistrikan dan peralatan optik (19)
+9. Pabrik lainnya yang tidak diklasifikasikan (23)
+10. Konstruksi (28)
+11. Perdagangan grosir dan eceran; Perbaikan kendaraan bermotor, sepeda motor serta barang personal dan rumah tangga (29)
+12. Hotel dan restoran (30)
+13. Pengangkutan, penyimpanan, dan komunikas (31)
+14. Intermediasi keuangan, real estate, penyewaan (32)
+15. Teknologi informasi (33)
+16. Jasa rekayasa (34)
+17. Jasa lainnya (35)
+18. Administrasi umum (36)
+19. Pendidikan (37)
+20. Kesehatan dan tugas sosial(38)
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_9001_2015_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_9001_2015"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+
+        <record id="wa_interactive_template_scope_14001_2015" model="wa.template">
+            <field name="name">wa_interactive_template_scope_14001_2015</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope 14001:2015 :
+    1. Pertanian, Kehutanan, dan Perikanan (01)
+    2. Pertambangan dan Penggalian (02)
+    3. Produk makanan, minuman dan tembakau (03)
+    4. Terbatas pada produk logam fabrikasi (17a)
+    5. Kelistrikan dan peralatan optik (19) 
+    6. Peralatan angkut lainnya (22)
+    7. Konstruksi (28)
+    8. Hotel dan restoran (30)
+    9. Pengangkutan, penyimpanan, dan komunikasi (31)
+    10. Teknologi informasi (33)
+    11. Jasa lainnya (35)
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_14001_2015_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_14001_2015"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_14001_2015_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_14001_2015"
+            />
+            <field name="text">
+                Scope 14001:2015 :
+1. Pertanian, Kehutanan, dan Perikanan (01)
+2. Pertambangan dan Penggalian (02)
+3. Produk makanan, minuman dan tembakau (03)
+4. Terbatas pada produk logam fabrikasi (17a)
+5. Kelistrikan dan peralatan optik (19) 
+6. Peralatan angkut lainnya (22)
+7. Konstruksi (28)
+8. Hotel dan restoran (30)
+9. Pengangkutan, penyimpanan, dan komunikasi (31)
+10. Teknologi informasi (33)
+11. Jasa lainnya (35)
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_14001_2015_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_14001_2015"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+
+        <record id="wa_interactive_template_scope_45001_2015" model="wa.template">
+            <field name="name">wa_interactive_template_scope_45001_2015</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope 45001:2015 :
+    1. Pertambangan dan Penggalian (02) 
+    2. Bahan kimia, produk kimia dan serat (12)
+    3. Karet dan produk plastik (14)
+    4. Terbatas pada produk logam fabrikasi (17a)
+    5. Kelistrikan dan peralatan optik (19)
+    6. Konstruksi (28)
+    7. Mesin dan peralatan (18)
+    8. Perdagangan grosir dan eceran; Perbaikan kendaraan bermotor, sepeda motor serta barang personal dan rumah tangga (29)
+    9. Pengangkutan, penyimpanan, dan komunikasi (31)
+    10. Teknologi informasi (33)
+    11. Jasa rekayasa (34)
+    12. Jasa lainnya (35)
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_45001_2015_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_45001_2015"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_45001_2015_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_45001_2015"
+            />
+            <field name="text">
+                Scope 45001:2015 :
+1. Pertambangan dan Penggalian (02)
+2. Bahan kimia, produk kimia dan serat (12)
+3. Karet dan produk plastik (14)
+4. Terbatas pada produk logam fabrikasi (17a)
+5. Kelistrikan dan peralatan optik (19)
+6. Konstruksi (28)
+7. Mesin dan peralatan (18)
+8. Perdagangan grosir dan eceran; Perbaikan kendaraan bermotor, sepeda motor serta barang personal dan rumah tangga (29)
+9. Pengangkutan, penyimpanan, dan komunikasi (31)
+10. Teknologi informasi (33)
+11. Jasa rekayasa (34)
+12. Jasa lainnya (35)
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_45001_2015_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_45001_2015"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+        
+
+
+        <record id="wa_interactive_template_scope_haccp" model="wa.template">
+            <field name="name">wa_interactive_template_scope_haccp</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope HACCP :
+    1. Produk-produk susu dan analognya (01) 
+    2. Lemak, minyak, dan emulsi minyak (02) 
+    3. Gula dan pemanis, termasuk madu (11)
+    4. Jasa Boga (19)
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_haccp_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_haccp"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_haccp_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_haccp"
+            />
+            <field name="text">
+                Scope HACCP :
+1. Produk-produk susu dan analognya (01) 
+2. Lemak, minyak, dan emulsi minyak (02) 
+3. Gula dan pemanis, termasuk madu (11)
+4. Jasa Boga (19)
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_haccp_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_haccp"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+        
+        <record id="wa_interactive_template_scope_22000_2018" model="wa.template">
+            <field name="name">wa_interactive_template_scope_22000_2018</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope 22000:2018 :
+    1. Pengelolaan produk hewan mudah rusak (C1) 
+    2. Pengelolaan produk yang stabil pada suhu ruang (CIV) 
+    3. Produksi pakan ternah (DI)
+    4. Jasa boga (E)
+    5. Jasa (H)
+    6. Produksi kemasan pangan dan bahan kemasan pangan (I)
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_22000_2018_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_22000_2018"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_22000_2018_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_22000_2018"
+            />
+            <field name="text">
+                Scope 22000:2018 :
+1. Pengelolaan produk hewan mudah rusak (CI) 
+2. Pengelolaan produk yang stabil pada suhu ruang (CIV) 
+3. Produksi pakan ternah (DI)
+4. Jasa boga (E)
+5. Jasa (H)
+6. Produksi kemasan pangan dan bahan kemasan pangan (I)
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_22000_2018_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_22000_2018"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+       
+
+
+        <record id="wa_interactive_template_scope_27001_2022" model="wa.template">
+            <field name="name">wa_interactive_template_scope_27001_2022</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope 27001:2022 :
+    ISO/IEC 27001:2022 adalah Sistem Manajemen Keamanan Informasi (Information Security Management System/ISMS) standar internasional yang mengatur praktik keamanan informasi di berbagai organisasi/Perusahaan, membantu organisasi mengidentifikasi, mengelola, dan mengurangi risiko keamanan informasi. Dengan menerapkan standar ini, organisasi dapat meningkatkan perlindungan data dan kepatuhan hukum.
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_27001_2022_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_27001_2022"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_27001_2022_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_27001_2022"
+            />
+            <field name="text">
+                Scope 27001:2022 :
+ISO/IEC 27001:2022 adalah Sistem Manajemen Keamanan Informasi (Information Security Management System/ISMS) standar internasional yang mengatur praktik keamanan informasi di berbagai organisasi/Perusahaan, membantu organisasi mengidentifikasi, mengelola, dan mengurangi risiko keamanan informasi. Dengan menerapkan standar ini, organisasi dapat meningkatkan perlindungan data dan kepatuhan hukum.
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_27001_2022_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_27001_2022"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+        
+
+        <record id="wa_interactive_template_scope_20000_1_2018" model="wa.template">
+            <field name="name">wa_interactive_template_scope_20000_1_2018</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope 20000-1:2018 :
+    ISO 20000-1:2018 : ISO/IEC 20000-1:2018 adalah standar  yang menyediakan kerangka kerja untuk manajemen layanan TI. Standar internasional ini membantu perusahaan dalam memastikan bahwa layanan TI berjalan efektif dan berkualitas serta sesuai dengan kebutuhan pelanggan. standar ini untuk organisasi yang ingin mengamankan data , mengurangi risiko siber, dan menunjukkan kepatuhan terhadap regulasi keamanan informasi.
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_20000_1_2018_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_20000_1_2018"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_20000_1_2018_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_20000_1_2018"
+            />
+            <field name="text">
+                Scope 20000-1:2018 :
+ISO 20000-1:2018 : ISO/IEC 20000-1:2018 adalah standar  yang menyediakan kerangka kerja untuk manajemen layanan TI. Standar internasional ini membantu perusahaan dalam memastikan bahwa layanan TI berjalan efektif dan berkualitas serta sesuai dengan kebutuhan pelanggan. standar ini untuk organisasi yang ingin mengamankan data , mengurangi risiko siber, dan menunjukkan kepatuhan terhadap regulasi keamanan informasi.
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_20000_1_2018_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_20000_1_2018"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+        
+
+        <record id="wa_interactive_template_scope_21001_2018" model="wa.template">
+            <field name="name">wa_interactive_template_scope_21001_2018</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope 21001:2018 :
+    1. Pendidikan Anak Usia Dini
+    2. Pendidikan Dasar dan Menengah
+    3. Pendidikan Tinggi
+    4. Organisasi Pendidikan 
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_21001_2018_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_21001_2018"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_21001_2018_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_21001_2018"
+            />
+            <field name="text">
+                Scope 21001:2018 :
+1. Pendidikan Anak Usia Dini
+2. Pendidikan Dasar dan Menengah
+3. Pendidikan Tinggi
+4. Organisasi Pendidikan 
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_21001_2018_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_21001_2018"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+        
+
+        <record id="wa_interactive_template_scope_37301" model="wa.template">
+            <field name="name">wa_interactive_template_scope_37301</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope 37301 :
+    ISO 37301 adalah standar internasional yang menetapkan persyaratan dan panduan untuk Sistem Manajemen Kepatuhan (Compliance Management System - CMS) dalam suatu organisasi. Standar ini dirancang untuk membantu organisasi dalam mematuhi peraturan, hukum, dan standar etika yang berlaku, serta mengelola risiko kepatuhan dengan lebih efektif.
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_37301_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_37301"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_37301_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_37301"
+            />
+            <field name="text">
+                Scope 37301 :
+ISO 37301 adalah standar internasional yang menetapkan persyaratan dan panduan untuk Sistem Manajemen Kepatuhan (Compliance Management System - CMS) dalam suatu organisasi. Standar ini dirancang untuk membantu organisasi dalam mematuhi peraturan, hukum, dan standar etika yang berlaku, serta mengelola risiko kepatuhan dengan lebih efektif.
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_37301_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_37301"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+        
+
+        <record id="wa_interactive_template_scope_37001" model="wa.template">
+            <field name="name">wa_interactive_template_scope_37001</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope 37001 :
+    ISO 37001 adalah standar internasional yang menetapkan persyaratan untuk Sistem Manajemen Anti-Suap (Anti-Bribery Management System - ABMS). Standar ini membantu organisasi mencegah dan mengelola risiko suap melalui kebijakan, prosedur, dan kontrol yang ketat. Dengan sertifikasi ISO 37001, organisasi dapat menunjukkan komitmen terhadap bisnis yang etis, transparan, dan bebas dari praktik korupsi.
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_37001_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_37001"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_37001_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_37001"
+            />
+            <field name="text">
+                Scope 37001 :
+    ISO 37001 adalah standar internasional yang menetapkan persyaratan untuk Sistem Manajemen Anti-Suap (Anti-Bribery Management System - ABMS). Standar ini membantu organisasi mencegah dan mengelola risiko suap melalui kebijakan, prosedur, dan kontrol yang ketat. Dengan sertifikasi ISO 37001, organisasi dapat menunjukkan komitmen terhadap bisnis yang etis, transparan, dan bebas dari praktik korupsi.
+            </field>
+        </record>
+       
+        <record id="wa_interactive_template_scope_37001_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_37001"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+        
+
+        <record id="wa_interactive_template_scope_ISPO" model="wa.template">
+            <field name="name">wa_interactive_template_scope_ISPO</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope ISPO :
+    1. Integrasi
+    2. Kebun
+    3. Pabrik
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_ISPO_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_ISPO"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_ISPO_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_ISPO"
+            />
+            <field name="text">
+                Scope ISPO :
+1. Integrasi
+2. Kebun
+3. Pabrik
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_ISPO_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_ISPO"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+        
+
+        <record id="wa_interactive_template_scope_ISCC_EU" model="wa.template">
+            <field name="name">wa_interactive_template_scope_ISCC_EU</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope ISCC EU :
+    ISCC EU adalah sistem sertifikasi yang digunakan untuk memenuhi persyaratan Renewable Energy Directive (RED II) Uni Eropa terkait bahan bakar nabati dan energi terbarukan berlaku untuk biofuel, biomassa, dan bahan baku terbarukan yang digunakan di sektor energi dan transportasi.
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_ISCC_EU_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_ISCC_EU"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_ISCC_EU_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_ISCC_EU"
+            />
+            <field name="text">
+                Scope ISCC EU :
+ISCC EU adalah sistem sertifikasi yang digunakan untuk memenuhi persyaratan Renewable Energy Directive (RED II) Uni Eropa terkait bahan bakar nabati dan energi terbarukan berlaku untuk biofuel, biomassa, dan bahan baku terbarukan yang digunakan di sektor energi dan transportasi.
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_ISCC_EU_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_ISCC_EU"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+        
+        <record id="wa_interactive_template_scope_ISCC_Plus" model="wa.template">
+            <field name="name">wa_interactive_template_scope_ISCC_Plus</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Scope ISCC Plus :
+    ISCC adalah adalah sistem sertifikasi yang menawarkan solusi untuk penerapan dan sertifikasi rantai pasokan bahan baku pertanian, kehutanan, limbah dan residu, bahan dan bahan bakar karbon daur ulang, serta bahan yang berkelanjutan, bebas deforestasi, dan dapat dilacak. Sertifikasi pihak ketiga yang independen memastikan kepatuhan terhadap persyaratan keberlanjutan ekologis dan sosial yang tinggi, penghematan emisi gas rumah kaca. ISCC EU dan ISCC Plus adalah 2 skema yang dimiliki oleh ISCC.
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_ISCC_Plus_header" model="components">
+            <field name="type">header</field>
+            <field name="formate">media</field>
+            <field name="formate_media_type">static</field>
+            <field name="media_type">image</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_ISCC_Plus"
+            />
+        </record>
+        <record id="wa_interactive_template_scope_ISCC_Plus_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_ISCC_Plus"
+            />
+            <field name="text">
+                Scope ISCC Plus :
+ISCC adalah adalah sistem sertifikasi yang menawarkan solusi untuk penerapan dan sertifikasi rantai pasokan bahan baku pertanian, kehutanan, limbah dan residu, bahan dan bahan bakar karbon daur ulang, serta bahan yang berkelanjutan, bebas deforestasi, dan dapat dilacak. Sertifikasi pihak ketiga yang independen memastikan kepatuhan terhadap persyaratan keberlanjutan ekologis dan sosial yang tinggi, penghematan emisi gas rumah kaca. ISCC EU dan ISCC Plus adalah 2 skema yang dimiliki oleh ISCC.
+            </field>
+        </record>
+        <record id="wa_interactive_template_scope_ISCC_Plus_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_scope_ISCC_Plus"
+            />
+            <field name="interactive_button_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'title': 'Standard'}),
+                (0, 0, {'title': 'Main Menu'})
+            ]"
+            />
+        </record>
+        
+
+
+
+
+        <!-- <record id="wa_interactive_template_1" model="wa.template">
+            <field name="name">wa_interactive_template_1</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                            Please pick the product from the below 👇
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_1_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_1"
+            />
+            <field name="text">
+                Please pick the product from the below 👇
+            </field>
+        </record>
+        <record id="wa_interactive_template_1_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">list</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_1"
+            />
+            <field
+                name="interactive_list_ids"
+                eval="[
+            (5, 0, 0),
+            (0, 0, {
+                'main_title': 'Menu',
+                'title_ids': [(5, 0, 0),
+                (0, 0, {
+                   'title': 'Refrigerator'
+                }),
+                (0, 0, {
+                   'title': 'AC'
+                }),
+                (0, 0, {
+                   'title': 'Washing Machine'
+                })]
+            })]"
+            />
+        </record>
+
+        <record id="wa_interactive_template_2" model="wa.template">
+            <field name="name">wa_interactive_template_2</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                            Which type of Refrigerator do you own?
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_2_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_2"
+            />
+            <field name="text">
+                Which type of Refrigerator do you own?
+            </field>
+        </record>
+        <record id="wa_interactive_template_2_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_2"
+            />
+            <field
+                name="interactive_button_ids"
+                eval="[
+            (5, 0, 0),
+            (0, 0, {
+                'title': 'Single Door',
+            }),
+            (0, 0, {
+                'title': 'Double Door',
+            })]"
+            />
+        </record>
+
+        <record id="wa_interactive_template_3" model="wa.template">
+            <field name="name">wa_interactive_template_3</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                            Which of the following issues are you facing?
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_3_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_3"
+            />
+            <field name="text">
+                Which of the following issues are you facing?
+            </field>
+        </record>
+        <record id="wa_interactive_template_3_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_3"
+            />
+            <field
+                name="interactive_button_ids"
+                eval="[
+            (5, 0, 0),
+            (0, 0, {
+                'title': 'Water Leakage'
+            }),
+            (0, 0, {
+                'title': 'No Cooling',
+            })]"
+            />
+        </record>
+
+        <record id="wa_interactive_template_4" model="wa.template">
+            <field name="name">wa_interactive_template_4</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                            DISCLAIMER: Service charges will apply if your product is out of warranty.
+
+                            Our representatives will get in touch with you about the charges involved.
+
+                            💡 Click Raise Ticket to continue or Menu to go back to the main menu.
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_4_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_4"
+            />
+            <field name="text">
+                DISCLAIMER: Service charges will apply if your product is out of warranty.
+
+                Our representatives will get in touch with you about the charges involved.
+
+                💡 Click Raise Ticket to continue or Menu to go back to the main menu.
+            </field>
+        </record>
+        <record id="wa_interactive_template_4_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_4"
+            />
+            <field
+                name="interactive_button_ids"
+                eval="[
+            (5, 0, 0),
+            (0, 0, {
+                'title': 'Raise Issue'
+            }),
+            (0, 0, {
+                'title': 'Menu',
+            })]"
+            />
+        </record>
+
+        <record id="wa_interactive_template_5" model="wa.template">
+            <field name="name">wa_interactive_template_5</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                           Which type of Air Conditioner do you own?
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_5_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_5"
+            />
+            <field name="text">
+                Which type of Air Conditioner do you own?
+            </field>
+        </record>
+        <record id="wa_interactive_template_5_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_5"
+            />
+            <field
+                name="interactive_button_ids"
+                eval="[
+            (5, 0, 0),
+            (0, 0, {
+                'title': 'Window AC'
+            }),
+            (0, 0, {
+                'title': 'SPLIT AC - NORMAL',
+            })]"
+            />
+        </record>
+
+        <record id="wa_interactive_template_6" model="wa.template">
+            <field name="name">wa_interactive_template_6</field>
+            <field name="provider_id" ref="tus_meta_whatsapp_base.provider_1" />
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="template_type">interactive</field>
+            <field name="state">added</field>
+            <field name="category">marketing</field>
+            <field name="lang" ref="base.lang_en" />
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                           Which type of Washing Machine do you own?
+                        </p>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="wa_interactive_template_6_body" model="components">
+            <field name="type">body</field>
+            <field name="formate">text</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_6"
+            />
+            <field name="text">
+                Which type of Washing Machine do you own?
+            </field>
+        </record>
+        <record id="wa_interactive_template_6_interactive" model="components">
+            <field name="type">interactive</field>
+            <field name="interactive_type">button</field>
+            <field
+                name="wa_template_id"
+                ref="odoo_whatsapp_chatbot.wa_interactive_template_6"
+            />
+            <field
+                name="interactive_button_ids"
+                eval="[
+            (5, 0, 0),
+            (0, 0, {
+                'title': 'Fully Automatic'
+            }),
+            (0, 0, {
+                'title': 'Semi Automatic',
+            }),
+            (0, 0, {
+                'title': 'Front Loading',
+            })]"
+            />
+        </record> -->
+    </data>
+</odoo>

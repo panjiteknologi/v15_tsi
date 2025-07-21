@@ -1,0 +1,462 @@
+<odoo>
+    <data>
+
+        <!-- PENGAJUAN FEE MARKETING -->
+
+        <record id="seq_pengajuan_marketing" model="ir.sequence">
+            <field name="name">Pengajuan Fee Marketing Sequence</field>
+            <field name="code">tsi.pengajuan.marketing</field>
+            <field name="prefix">F-FIN-</field>
+            <field name="padding">2</field>
+        </record>
+
+        <record id="tsi_pengajuan_marketing_report" model="ir.actions.report">
+            <field name="name">Report Pengajuan Fee Marketing</field>
+            <field name="model">tsi.pengajuan.marketing</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.tsi_pengajuan_marketing_report</field>
+            <field name="report_file">v15_tsi.tsi_pengajuan_marketing_report</field>
+            <field name="binding_model_id" ref="model_tsi_pengajuan_marketing"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="tsi_pengajuan_marketing_action" model="ir.actions.act_window">
+            <field name="name">Permintaan Fee Marketing</field>
+            <field name="res_model">tsi.pengajuan.marketing</field>
+            <field name="view_mode">tree,form,pivot,graph,kanban</field>
+        </record>
+
+        <!-- Grafik Sales Person dan Percentage -->
+        <record id="view_graph_sales_percentage" model="ir.ui.view">
+            <field name="name">tsi.pnl.project.graph</field>
+            <field name="model">tsi.pnl.project</field>
+            <field name="arch" type="xml">
+                <graph string="Sales Person dan Percentage" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="create_date" type="row"/>
+                    <field name="sales_person" optional="show" widget="many2one_avatar_user"/>
+                    <field name="percentage" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_graph_sales_percentage" model="ir.actions.act_window">
+            <field name="name">Graph - Sales Person dan Percentage</field>
+            <field name="res_model">tsi.pnl.project</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_graph_sales_percentage"/>
+            <field name="domain">['&amp;', ('sales_person', '!=', False), '&amp;', ('create_date', '&gt;=', '2025-01-01'), ('create_date', '&lt;=', '2025-12-31')]</field>
+        </record>
+
+        <record id="tsi_pengajuan_marketing_view_tree" model="ir.ui.view">
+            <field name="name">tsi.pengajuan_marketing.tree</field>
+            <field name="model">tsi.pengajuan.marketing</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="issue_date" />
+                    <field name="sales_person" optional="show" widget="many2one_avatar_user"/>
+                    <field name="customer" />
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                    <field name="tahap_audit" />
+                    <field name="tanggal_pelunasan" />
+                    <field name="nilai_bersih" />
+                    <field name="fee_marketing" />
+                    <field name="currency_id" invisible="1" />
+                    <field name="total_fee_marketing" sum="Total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="state" widget="badge" decoration-success = "state == 'approved'" decoration-warning = "state == 'reject'" decoration-danger = "state == 'draft'" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_pengajuan_marketing_view_form" model="ir.ui.view">
+            <field name="name">tsi.pengajuan_marketing.form</field>
+            <field name="model">tsi.pengajuan.marketing</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,done" />
+                        <button name="action_approved" string="Approved" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'approved')]}" />
+                        <button name="action_reject" string="Reject" type="object" attrs="{'invisible': [('state', '=', 'approved')]}" />
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="name" />
+                            <field name="issue_date" />
+                            <field name="user_id" domain="[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]" optional="show" widget="many2one_avatar_user" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                        <group col="4" string="Permintaan Fee Marketing">
+                            <field name="sales_person" optional="show" widget="many2one_avatar_user"/>
+                            <field name="customer"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                            <field name="tahap_audit"/>
+                            <field name="tanggal_pelunasan"/>
+                            <field name="nilai_bersih"/>
+                            <field name="fee_marketing"/>
+                            <field name="total_fee_marketing" />
+                        </group>
+                        <group col="4" string="Peraturan Fee Marketing">
+                            <field name="note" />
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- PERJALANAN DINAS -->
+
+        <record id="tsi_perjalanan_dinas_action" model="ir.actions.act_window">
+            <field name="name">Perjalanan Dinas</field>
+            <field name="res_model">tsi.perjalanan.dinas</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="tsi_perjalanan_dinas_report" model="ir.actions.report">
+            <field name="name">Report Perjalanan Dinas</field>
+            <field name="model">tsi.perjalanan.dinas</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.tsi_perjalanan_dinas_report</field>
+            <field name="report_file">v15_tsi.tsi_perjalanan_dinas_report</field>
+            <field name="binding_model_id" ref="model_tsi_perjalanan_dinas"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="tsi_perjalanan_dinas_view_tree" model="ir.ui.view">
+            <field name="name">tsi.perjalanan_dinas.tree</field>
+            <field name="model">tsi.perjalanan.dinas</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="customer" />
+                    <field name="auditor" />
+                    <field name="jabatan" />
+                    <field name="tanggal" />
+                    <field name="tujuan_perjalanan" />
+                    <field name="lama_tugas" />
+                    <field name="user_id" />
+                    <field name="state" widget="badge" decoration-success = "state == 'approved'" decoration-warning = "state == 'reject'" decoration-danger = "state == 'draft'" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_perjalanan_dinas_view_form" model="ir.ui.view">
+            <field name="name">tsi.perjalanan_dinas.form</field>
+            <field name="model">tsi.perjalanan.dinas</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,done" />
+                        <button name="action_approved" string="Approved" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'approved')]}" />
+                        <button name="action_reject" string="Reject" type="object" />
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="customer" />
+                            <field name="auditor" />
+                            <field name="tanggal" />
+                            <field name="jabatan" />
+                            <field name="user_id" domain="[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]" optional="show" widget="many2one_avatar_user" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                        <group col="4">
+                            <field name="tujuan_perjalanan"/>
+                            <field name="lama_tugas" />
+                        </group>
+                        <notebook>
+                            <page name="Rincian Biaya Perjalanan Dinas" string="Rincian Biaya">
+                                <group>
+                                    <field name="lines" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="nama"/>
+                                            <field name="uraian"/>
+                                            <field name="biaya"/>
+                                            <field name="hari" />
+                                            <field name="jumlah" />
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="nama"/>
+                                                <field name="uraian"/>
+                                                <field name="biaya"/>
+                                                <field name="hari" />
+                                                <field name="jumlah" />
+                                            </group>
+                                        </form>
+                                    </field>
+                                    <group col="2">
+                                        <field name="total_jumlah" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- PENGAJUAN MANDAYS -->
+
+        <record id="seq_pengajuan_mandays" model="ir.sequence">
+            <field name="name">Pengajuan Mandays Sequence</field>
+            <field name="code">tsi.pengajuan.mandays</field>
+            <field name="prefix">PD/IWY</field>
+            <field name="suffix">/%(month)s/%(year)s</field>
+            <field name="padding">3</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="tsi_pengajuan_mandays_action" model="ir.actions.act_window">
+            <field name="name">Pengajuan Mandays</field>
+            <field name="res_model">tsi.pengajuan.mandays</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="tsi_pengajuan_mandays_report" model="ir.actions.report">
+            <field name="name">Report Pengajuan Mandays</field>
+            <field name="model">tsi.pengajuan.mandays</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.tsi_pengajuan_mandays_report</field>
+            <field name="report_file">v15_tsi.tsi_pengajuan_mandays_report</field>
+            <field name="binding_model_id" ref="model_tsi_pengajuan_mandays"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="tsi_pengajuan_mandays_view_tree" model="ir.ui.view">
+            <field name="name">tsi.pengajuan_mandays.tree</field>
+            <field name="model">tsi.pengajuan.mandays</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="issue_date" />
+                    <field name="auditor" />
+                    <!-- <field name="state" widget="badge" decoration-success = "state == 'approved'" decoration-warning = "state == 'reject'" decoration-danger = "state == 'draft'" /> -->
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_pengajuan_mandays_view_form" model="ir.ui.view">
+            <field name="name">tsi.pengajuan_mandays.form</field>
+            <field name="model">tsi.pengajuan.mandays</field>
+            <field name="arch" type="xml">
+                <form>
+                    <!-- <header>
+                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,done" />
+                        <button name="action_approved" string="Approved" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'approved')]}" />
+                        <button name="action_reject" string="Reject" type="object" />
+                    </header> -->
+                    <sheet>
+                        <group col="4">
+                            <field name="name" />
+                            <field name="issue_date" />
+                            <field name="auditor" />
+                            <field name="user_id" domain="[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]" optional="show" widget="many2one_avatar_user" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                        <notebook>
+                            <page name="Uraian Kebutuhan" string="Uraian Kebutuhan">
+                                <group>
+                                    <field name="lines" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="customer"/>
+                                            <field name="audit_date"/>
+                                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                                            <field name="audit_type"/>
+                                            <field name="volume" />
+                                            <field name="satuan" />
+                                            <field name="biaya_satuan" />
+                                            <field name="jumlah" />
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="customer"/>
+                                                <field name="audit_date"/>
+                                                <field name="iso_standard_ids" widget="many2many_tags"/>
+                                                <field name="audit_type"/>
+                                                <field name="volume" />
+                                                <field name="satuan" />
+                                                <field name="biaya_satuan" />
+                                                <field name="jumlah" />
+                                            </group>
+                                        </form>
+                                    </field>
+                                    <group col="2">
+                                        <field name="total_jumlah" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- PERMINTAAN DANA -->
+
+        <record id="seq_permintaan_dana" model="ir.sequence">
+            <field name="name">Permintaan Dana Sequence</field>
+            <field name="code">tsi.permintaan.dana</field>
+            <field name="prefix">PD-TSI/</field>
+            <field name="suffix">/%(month)s/%(year)s</field>
+            <field name="padding">3</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="tsi_permintaan_dana_report" model="ir.actions.report">
+            <field name="name">Report Rekapitulasi Permintaan Dana</field>
+            <field name="model">tsi.permintaan.dana</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.tsi_permintaan_dana_report</field>
+            <field name="report_file">v15_tsi.tsi_permintaan_dana_report</field>
+            <field name="binding_model_id" ref="model_tsi_permintaan_dana"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="tsi_permintaan_dana_action" model="ir.actions.act_window">
+            <field name="name">Rekapitulasi Permintaan Dana</field>
+            <field name="res_model">tsi.permintaan.dana</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="tsi_permintaan_dana_view_tree" model="ir.ui.view">
+            <field name="name">tsi.permintaan_dana.tree</field>
+            <field name="model">tsi.permintaan.dana</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="issue_date" />
+                    <!-- <field name="state" widget="badge" decoration-success = "state == 'approved'" decoration-warning = "state == 'reject'" decoration-danger = "state == 'draft'" /> -->
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_permintaan_dana_view_form" model="ir.ui.view">
+            <field name="name">tsi.permintaan_dana.form</field>
+            <field name="model">tsi.permintaan.dana</field>
+            <field name="arch" type="xml">
+                <form>
+                    <!-- <header>
+                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,done" />
+                        <button name="action_approved" string="Approved" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'approved')]}" />
+                        <button name="action_reject" string="Reject" type="object" attrs="{'invisible': [('state', '=', 'approved')]}" />
+                    </header> -->
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="issue_date" />
+                        </group>
+                        <notebook>
+                            <page name="Rincian Permintaan Dana" string="Rincian Permintaan Dana">
+                                <group>
+                                    <field name="lines" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="ket"/>
+                                            <field name="customer"/>
+                                            <field name="nominal"/>
+                                            <field name="note" />
+                                            <field name="state" />
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="ket"/>
+                                                <field name="customer"/>
+                                                <field name="nominal"/>
+                                                <field name="note" />
+                                                <field name="state" />
+                                            </group>
+                                        </form>
+                                    </field>
+                                    <group col="2">
+                                        <field name="total_nominal" readonly="1" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- PNL PROJECT -->
+
+        <record id="tsi_pnl_project_action" model="ir.actions.act_window">
+            <field name="name">Profit N Loss Project</field>
+            <field name="res_model">tsi.pnl.project</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="tsi_pnl_project_view_tree" model="ir.ui.view">
+            <field name="name">tsi.pnl_project.tree</field>
+            <field name="model">tsi.pnl.project</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id" />
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                    <field name="fee_cashback" />
+                    <field name="fee_marketing" />
+                    <field name="biaya_pajak" />
+                    <field name="biaya_mandays" />
+                    <field name="tunjangan_dinas" />
+                    <field name="total_biaya" />
+                    <field name="profit" />
+                    <field name="percentage" widget="percentage" decoration-danger="percentage &gt;= 10 and percentage &lt; 70" decoration-success="percentage &gt;= 70 and percentage &lt;= 100"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_pnl_project_view_form" model="ir.ui.view">
+            <field name="name">tsi.pnl_project.form</field>
+            <field name="model">tsi.pnl.project</field>
+            <field name="arch" type="xml">
+                <form>
+                    <!-- <header>
+                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,done" />
+                        <button name="action_done" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'done')]}" />
+                    </header> -->
+                    <sheet>
+                        <group col="4">
+                            <field name="partner_id" />
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                            <field name="sales_person" />
+                        </group>
+                        <group col="4" string="Rincian Profit N Loss Project">
+                            <field name="fee_cashback"/>
+                            <field name="biaya_transport"/>
+                            <field name="fee_marketing"/>
+                            <field name="biaya_akreditasi"/>
+                            <field name="tunjangan_dinas"/>
+                            <field name="biaya_tak_terduga"/>
+                            <field name="biaya_pajak" />
+                            <field name="total_biaya" />
+                            <field name="biaya_mandays" />
+                            <field name="profit" />
+                            <field name="price_unit" />
+                            <field name="percentage" widget="percentage" decoration-danger="percentage &gt;= 10 and percentage &lt; 70" decoration-success="percentage &gt;= 70 and percentage &lt;= 100"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

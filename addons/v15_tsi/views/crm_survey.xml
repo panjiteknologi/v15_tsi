@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="survey_form" name="SURVEI KEPUASAN LAYANAN">
+            <t t-call="website.layout">
+
+                <div class="container mb64" id="crm_survey_pelanggan">
+                    <style>
+                        .star-rating {
+                            display: flex;
+                            flex-direction: row-reverse;
+                            gap: 10px;
+                            justify-content: center;
+                            align-items: center; /* Pusatkan secara vertikal */
+                            width: 100%;
+                        }
+
+                        .star {
+                            display: none;
+                        }
+
+                        .star + label {
+                            font-size: 35px;
+                            color: black;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 50px;
+                            height: 50px;
+                        }
+
+                        /* Hover: Mewarnai bintang ke kiri */
+                        .star:hover ~ label,
+                        .star:hover {
+                            color: #ffbf00;
+                        }
+
+                        /* Checked: Tetap mewarnai bintang yang dipilih dan sebelumnya */
+                        .star:checked ~ label,
+                        .star:checked {
+                            color: #ffbf00;
+                        }
+
+                        .score-container {
+                            display: flex;
+                            gap: 10px;
+                            justify-content: center;
+                            margin-top: 10px;
+                        }
+
+                        /* Sembunyikan radio button default */
+                        .score-container input {
+                            display: none;
+                        }
+
+                        /* Styling untuk label sebagai kotak */
+                        .score-container label {
+                            width: 180px;
+                            height: 40px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border: 2px solid #ccc;
+                            cursor: pointer;
+                            font-size: 15px;
+                            font-weight: bold;
+                            border-radius: 5px;
+                            background-color: white;
+                            transition: background-color 0.2s, border-color 0.2s;
+                        }
+
+                        /* Efek hover */
+                        .score-container label:hover {
+                            background-color: #f0f0f0;
+                        }
+
+                        /* Jika radio button terpilih, ubah warna */
+                        .score-container input:checked + label {
+                            background-color: green;
+                            color: white;
+                            border-color: green;
+                        }
+
+                        .score-label {
+                            font-size: 13px;
+                            color: gray;
+                            margin-left: 20px;
+                            text-align: left;
+                            flex: 1;
+                        }
+                        
+                        .score-right {
+                            font-size: 13px;
+                            color: gray;
+                            margin-right: 20px;
+                            text-align: right;
+                            flex: 1;
+                        }
+                    </style>
+                    <h1 class="mt-4">SURVEI KEPUASAN LAYANAN</h1>
+                    <p class="mt-4" style="font-weight: bold;">Pelanggan yang Terhormat,</p>
+                    <p class="mt-4">Kami mohon kesediaan Anda untuk dapat meluangkan waktu guna mengisi kuisioner ini. Saran dan masukan Anda sangat berharga dalam upaya meningkatkan pelayanan kami kepada Anda.</p>
+                    <p class="mt-4" style="font-style: italic;">Hormat kami,</p>
+                    <p>PT TSI Sertifikasi Internasional</p>
+                    <p>* Wajib diisi</p>
+                    <h3 style="color: green;">DATA UMUM</h3>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form action="/crm_survey_form/submit" method="post" class="form-horizontal mt32" enctype="multipart/form-data" id="crm_survey">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div t-if="error_message" class="alert alert-danger" role="alert">
+                                            <t t-foreach="error_message" t-as="err">
+                                                <t t-esc="err"/>
+                                                <br />
+                                            </t>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-lg-12">
+                                        <div class="alert alert-success">General Company Information</div>
+                                    </div> -->
+                                    <div class="form-group col-xl-6">
+                                        <label class="control-label" for="name">Organisasi / Perusahaan *</label>
+                                        <div>
+                                            <input type="text" class="form-control" name="company" id="company" placeholder="Masukkan jawaban anda" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label class="control-label" for="name">Nama *</label>
+                                        <div>
+                                            <input type="text" class="form-control" name="nama" placeholder="Masukkan jawaban anda" required="true"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label class="control-label" for="name">Jabatan / Bagian / Fungsi *</label>
+                                        <div>
+                                            <input type="text" class="form-control" name="jabatan" placeholder="Masukkan jawaban anda" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="email">Email *</label>
+                                        <input type="text" class="form-control" name="email" id="email" placeholder="Masukkan jawaban anda" required="true"/>
+                                    </div>
+                                    
+                                    <div class="form-group col-xl-6">
+                                        <label for="no_telp">Nomor Telp / HP *</label>
+                                        <input type="text" class="form-control" name="no_telp" id="no_telp" placeholder="Masukkan jawaban anda" required="true"/>
+                                    </div>
+                            
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label class="control-label" for="iso_standardx" style="padding-left: 15px;">Sistem Manajemen yang diaudit ( Jawaban boleh lebih dari 1 ) *</label>
+                                            <div id="fields_permit" class="d-grid grid-template-columns" 
+                                                style="padding-left: 25px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                                                <t t-foreach="iso_standard" t-as="permit">
+                                                    <div class="form-check" style="display: flex; align-items: center;">
+                                                        <input class="form-check-input iso-standard-checkbox" type="checkbox" name="iso_standardx" 
+                                                            t-att-id="'iso_standard_' + str(permit.id)" t-att-value="permit.id"/>
+                                                        <label class="form-check-label" t-att-for="'iso_standard_' + str(permit.id)" 
+                                                            style="margin-left: 8px; white-space: nowrap;">
+                                                            <t t-esc="permit.name"/>
+                                                        </label>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                            <div id="iso_standard_error" style="color: red; display: none;">
+                                                Please select at least one ISO Standard.
+                                            </div>
+                                            <!-- <div style="margin-left: 45px; margin-top: 15px;">
+                                                <input class="form-check-input" type="checkbox" id="iso_standardx_others" name="iso_standardx_others"/>
+                                                <label class="form-check-label" for="iso_standardx_others" style="margin-left: 8px; white-space: nowrap;">Others</label>
+                                                <div class="form-group col-md-3" id="iso_standard_others_input" style="display: none; margin-top: 10px;">
+                                                    <input type="text" id="other_standard" name="other_standard" class="form-control" />
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="tanggal_audit">Tanggal Pelaksanaan Audit</label>
+                                        <input type="date" class="form-control" name="tanggal_audit" id="tanggal_audit" placeholder="Masukkan jawaban anda" />
+                                    </div>
+                                    
+                                    <div class="form-group col-xl-6">
+                                        <label>Tahap Audit yang dijalankan</label>
+                                        <select id="tahap_audit" name="tahap_audit" class="form-control">
+                                            <option value="ia">Initial Audit</option>
+                                            <option value="sv1">Surveillance 1</option>
+                                            <option value="sv2">Surveillance 2</option>
+                                            <option value="sv3">Surveillance 3</option>
+                                            <option value="sv4">Surveillance 4</option>
+                                            <option value="re">Resertifikasi</option>
+                                        </select>
+                                    </div>
+                                    <!-- Sales -->
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">Penilaian dan Saran Sales</div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="question_1" class="form-label">
+                                            Bagaimana penilaian terhadap Sales (proses kontrak) PT TSI Sertifikasi Internasional?
+                                        </label>
+                                        <!-- <div id="star-rating-question-1" class="star-rating" style="display: flex; gap: 10px;">
+                                            <input type="radio" name="question_1" id="question_1-star-10" value="10" class="star" style="font-size: 30px;"/>
+                                            <label for="question_1-star-10">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-9" value="09" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-9">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-8" value="08" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-8">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-7" value="07" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-7">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-6" value="06" class="star" style="font-size: 30px;"/>
+                                            <label for="question_1-star-6">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-5" value="05" class="star" style="font-size: 30px;"/>
+                                            <label for="question_1-star-5">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-4" value="04" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-4">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-3" value="03" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-3">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-2" value="02" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-2">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-1" value="01" class="star" style="font-size: 30px;"/>
+                                            <label for="question_1-star-1">&#9733;</label>
+                                        </div> -->
+                                        <div id="star-rating-question-1" class="star-rating" style="display: flex; gap: 10px;">
+                                            <input type="radio" name="question_1" id="question_1-star-1" value="01" class="star" style="font-size: 30px;"/>
+                                            <label for="question_1-star-1">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-2" value="02" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-2">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-3" value="03" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-3">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-4" value="04" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-4">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-5" value="05" class="star" style="font-size: 30px;"/>
+                                            <label for="question_1-star-5">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-6" value="06" class="star" style="font-size: 30px;"/>
+                                            <label for="question_1-star-6">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-7" value="07" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-7">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-8" value="08" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-8">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-9" value="09" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_1-star-9">&#9733;</label>
+
+                                            <input type="radio" name="question_1" id="question_1-star-10" value="10" class="star" style="font-size: 30px;"/>
+                                            <label for="question_1-star-10">&#9733;</label>
+                                        </div>
+                                        <input type="hidden" id="question_1" name="question_1" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="saran_1">Mohon saran / masukan untuk peningkatan kinerja Sales TSI</label>
+                                        <input type="text" class="form-control" name="saran_1" id="saran_1" placeholder="Masukkan jawaban anda" />
+                                    </div>
+                                    <!-- Admin -->
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">Penilaian dan Saran Admin</div>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label>Bagaimana penilaian terhadap Admin (persiapan dan penjadwalan audit) PT TSI Sertifikasi Internasional?</label>
+                                        <div id="star-rating-question-2" class="star-rating" style="display: flex; gap: 10px;">
+                                            <input type="radio" name="question_2" id="question_2-star-10" value="10" class="star" style="font-size: 30px;"/>
+                                            <label for="question_2-star-10">&#9733;</label>
+
+                                            <input type="radio" name="question_2" id="question_2-star-9" value="09" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_2-star-9">&#9733;</label>
+
+                                            <input type="radio" name="question_2" id="question_2-star-8" value="08" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_2-star-8">&#9733;</label>
+
+                                            <input type="radio" name="question_2" id="question_2-star-7" value="07" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_2-star-7">&#9733;</label>
+
+                                            <input type="radio" name="question_2" id="question_2-star-6" value="06" class="star" style="font-size: 30px;"/>
+                                            <label for="question_2-star-6">&#9733;</label>
+
+                                            <input type="radio" name="question_2" id="question_2-star-5" value="05" class="star" style="font-size: 30px;"/>
+                                            <label for="question_2-star-5">&#9733;</label>
+
+                                            <input type="radio" name="question_2" id="question_2-star-4" value="04" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_2-star-4">&#9733;</label>
+
+                                            <input type="radio" name="question_2" id="question_2-star-3" value="03" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_2-star-3">&#9733;</label>
+
+                                            <input type="radio" name="question_2" id="question_2-star-2" value="02" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_2-star-2">&#9733;</label>
+
+                                            <input type="radio" name="question_2" id="question_2-star-1" value="01" class="star" style="font-size: 30px;"/>
+                                            <label for="question_2-star-1">&#9733;</label>
+                                        </div>
+                                        <input type="hidden" id="question_2" name="question_2"/>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="saran_2">Mohon saran / masukan untuk peningkatan kinerja Admin TSI</label>
+                                        <input type="text" class="form-control" name="saran_2" id="saran_2" placeholder="Masukkan jawaban anda" />
+                                    </div>
+                                    <!-- Auditor 1 - 4 -->
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">Penilaian dan Saran Auditor</div>
+                                    </div>
+                                    <!-- Auditor 1 -->
+                                    <div class="form-group col-xl-6">
+                                        <label for="nama_auditor1">Nama Auditor 1 *</label>
+                                        <input type="text" class="form-control" name="nama_auditor1" id="nama_auditor1" placeholder="Masukkan jawaban anda" required="true"/>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label>Bagaimana penilaian terhadap Auditor 1 PT TSI Sertifikasi Internasional?</label>
+                                        <div id="star-rating-star_auditor1" class="star-rating" style="display: flex; gap: 10px;">
+                                            <input type="radio" name="star_auditor1" id="star_auditor1-star-10" value="10" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor1-star-10">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor1" id="star_auditor1-star-9" value="09" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor1-star-9">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor1" id="star_auditor1-star-8" value="08" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor1-star-8">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor1" id="star_auditor1-star-7" value="07" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor1-star-7">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor1" id="star_auditor1-star-6" value="06" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor1-star-6">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor1" id="star_auditor1-star-5" value="05" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor1-star-5">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor1" id="star_auditor1-star-4" value="04" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor1-star-4">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor1" id="star_auditor1-star-3" value="03" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor1-star-3">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor1" id="star_auditor1-star-2" value="02" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor1-star-2">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor1" id="star_auditor1-star-1" value="01" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor1-star-1">&#9733;</label>
+                                        </div>
+                                        <input type="hidden" id="star_auditor1" name="star_auditor1"/>
+                                    </div>
+                                    <!-- Auditor 2 -->
+                                    <div class="form-group col-xl-6">
+                                        <label for="nama_auditor2">Nama Auditor 2</label>
+                                        <input type="text" class="form-control" name="nama_auditor2" id="nama_auditor2" placeholder="Masukkan jawaban anda" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label>Bagaimana penilaian terhadap Auditor 2 PT TSI Sertifikasi Internasional?</label>
+                                        <div id="star-rating-star_auditor2" class="star-rating" style="display: flex; gap: 10px;">
+                                            <input type="radio" name="star_auditor2" id="star_auditor2-star-10" value="10" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor2-star-10">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor2" id="star_auditor2-star-9" value="09" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor2-star-9">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor2" id="star_auditor2-star-8" value="08" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor2-star-8">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor2" id="star_auditor2-star-7" value="07" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor2-star-7">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor2" id="star_auditor2-star-6" value="06" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor2-star-6">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor2" id="star_auditor2-star-5" value="05" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor2-star-5">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor2" id="star_auditor2-star-4" value="04" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor2-star-4">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor2" id="star_auditor2-star-3" value="03" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor2-star-3">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor2" id="star_auditor2-star-2" value="02" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor2-star-2">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor2" id="star_auditor2-star-1" value="01" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor2-star-1">&#9733;</label>
+                                        </div>
+                                        <input type="hidden" id="star_auditor2" name="star_auditor2"/>
+                                    </div>
+                                    <!-- Auditor 3 -->
+                                    <div class="form-group col-xl-6">
+                                        <label for="nama_auditor3">Nama Auditor 3</label>
+                                        <input type="text" class="form-control" name="nama_auditor3" id="nama_auditor3" placeholder="Masukkan jawaban anda" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label>Bagaimana penilaian terhadap Auditor 3 PT TSI Sertifikasi Internasional?</label>
+                                        <div id="star-rating-star_auditor3" class="star-rating" style="display: flex; gap: 10px;">
+                                            <input type="radio" name="star_auditor3" id="star_auditor3-star-10" value="10" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor3-star-10">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor3" id="star_auditor3-star-9" value="09" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor3-star-9">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor3" id="star_auditor3-star-8" value="08" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor3-star-8">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor3" id="star_auditor3-star-7" value="07" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor3-star-7">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor3" id="star_auditor3-star-6" value="06" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor3-star-6">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor3" id="star_auditor3-star-5" value="05" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor3-star-5">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor3" id="star_auditor3-star-4" value="04" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor3-star-4">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor3" id="star_auditor3-star-3" value="03" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor3-star-3">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor3" id="star_auditor3-star-2" value="02" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor3-star-2">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor3" id="star_auditor3-star-1" value="01" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor3-star-1">&#9733;</label>
+                                        </div>
+                                        <input type="hidden" id="star_auditor3" name="star_auditor3"/>
+                                    </div>
+                                    <!-- Auditor 4 -->
+                                    <div class="form-group col-xl-6">
+                                        <label for="nama_auditor4">Nama Auditor 4</label>
+                                        <input type="text" class="form-control" name="nama_auditor4" id="nama_auditor4" placeholder="Masukkan jawaban anda" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label>Bagaimana penilaian terhadap Auditor 4 PT TSI Sertifikasi Internasional?</label>
+                                        <div id="star-rating-star_auditor4" class="star-rating" style="display: flex; gap: 10px;">
+                                            <input type="radio" name="star_auditor4" id="star_auditor4-star-10" value="10" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor4-star-10">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor4" id="star_auditor4-star-9" value="09" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor4-star-9">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor4" id="star_auditor4-star-8" value="08" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor4-star-8">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor4" id="star_auditor4-star-7" value="07" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor4-star-7">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor4" id="star_auditor4-star-6" value="06" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor4-star-6">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor4" id="star_auditor4-star-5" value="05" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor4-star-5">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor4" id="star_auditor4-star-4" value="04" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor4-star-4">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor4" id="star_auditor4-star-3" value="03" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor4-star-3">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor4" id="star_auditor4-star-2" value="02" class="star"  style="font-size: 30px;"/>
+                                            <label for="star_auditor4-star-2">&#9733;</label>
+
+                                            <input type="radio" name="star_auditor4" id="star_auditor4-star-1" value="01" class="star" style="font-size: 30px;"/>
+                                            <label for="star_auditor4-star-1">&#9733;</label>
+                                        </div>
+                                        <input type="hidden" id="star_auditor4" name="star_auditor4"/>
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        <label for="saran_3">Mohon saran / masukan untuk peningkatan kinerja Auditor TSI</label>
+                                        <input type="text" class="form-control" name="saran_3" id="saran_3" placeholder="Masukkan jawaban anda" />
+                                    </div>
+                                    <!-- Finance -->
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">Penilaian dan Saran Finance</div>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label>Bagaimana penilaian terhadap Finance (proses invoicing) PT TSI Sertifikasi Internasional?</label>
+                                        <div id="star-rating-question-4" class="star-rating" style="display: flex; gap: 10px;">
+                                            <input type="radio" name="question_4" id="question_4-star-10" value="10" class="star" style="font-size: 30px;"/>
+                                            <label for="question_4-star-10">&#9733;</label>
+
+                                            <input type="radio" name="question_4" id="question_4-star-9" value="09" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_4-star-9">&#9733;</label>
+
+                                            <input type="radio" name="question_4" id="question_4-star-8" value="08" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_4-star-8">&#9733;</label>
+
+                                            <input type="radio" name="question_4" id="question_4-star-7" value="07" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_4-star-7">&#9733;</label>
+
+                                            <input type="radio" name="question_4" id="question_4-star-6" value="06" class="star" style="font-size: 30px;"/>
+                                            <label for="question_4-star-6">&#9733;</label>
+
+                                            <input type="radio" name="question_4" id="question_4-star-5" value="05" class="star" style="font-size: 30px;"/>
+                                            <label for="question_4-star-5">&#9733;</label>
+
+                                            <input type="radio" name="question_4" id="question_4-star-4" value="04" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_4-star-4">&#9733;</label>
+
+                                            <input type="radio" name="question_4" id="question_4-star-3" value="03" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_4-star-3">&#9733;</label>
+
+                                            <input type="radio" name="question_4" id="question_4-star-2" value="02" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_4-star-2">&#9733;</label>
+
+                                            <input type="radio" name="question_4" id="question_4-star-1" value="01" class="star" style="font-size: 30px;"/>
+                                            <label for="question_4-star-1">&#9733;</label>
+                                        </div>
+                                        <input type="hidden" id="question_4" name="question_4"/>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label for="saran_4">Mohon saran / masukan untuk peningkatan kinerja Finance TSI</label>
+                                        <input type="text" class="form-control" name="saran_4" id="saran_4" placeholder="Masukkan jawaban anda" />
+                                    </div>
+                                    <!-- Customer Relation/ Customer Care -->
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">Penilaian dan Saran Customer Relation/ Customer Care</div>
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        <label>Bagaimana penilaian terhadap Customer Relation/ Customer Care PT TSI Sertifikasi Internasional?</label>
+                                        <div id="star-rating-question-3" class="star-rating" style="display: flex; gap: 10px;">
+                                            <input type="radio" name="question_3" id="question_3-star-10" value="10" class="star" style="font-size: 30px;"/>
+                                            <label for="question_3-star-10">&#9733;</label>
+
+                                            <input type="radio" name="question_3" id="question_3-star-9" value="09" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_3-star-9">&#9733;</label>
+
+                                            <input type="radio" name="question_3" id="question_3-star-8" value="08" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_3-star-8">&#9733;</label>
+
+                                            <input type="radio" name="question_3" id="question_3-star-7" value="07" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_3-star-7">&#9733;</label>
+
+                                            <input type="radio" name="question_3" id="question_3-star-6" value="06" class="star" style="font-size: 30px;"/>
+                                            <label for="question_3-star-6">&#9733;</label>
+
+                                            <input type="radio" name="question_3" id="question_3-star-5" value="05" class="star" style="font-size: 30px;"/>
+                                            <label for="question_3-star-5">&#9733;</label>
+
+                                            <input type="radio" name="question_3" id="question_3-star-4" value="04" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_3-star-4">&#9733;</label>
+
+                                            <input type="radio" name="question_3" id="question_3-star-3" value="03" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_3-star-3">&#9733;</label>
+
+                                            <input type="radio" name="question_3" id="question_3-star-2" value="02" class="star"  style="font-size: 30px;"/>
+                                            <label for="question_3-star-2">&#9733;</label>
+
+                                            <input type="radio" name="question_3" id="question_3-star-1" value="01" class="star" style="font-size: 30px;"/>
+                                            <label for="question_3-star-1">&#9733;</label>
+                                        </div>
+                                        <input type="hidden" id="question_3" name="question_3"/>
+                                    </div>
+
+                                    <div class="form-group col-lg-12">
+                                        <label>Dari mana Anda mendapatkan informasi mengenai PT TSI Sertifikasi Internasional?</label>
+                                        <select id="question_5" name="question_5" class="form-control">
+                                            <option value="website">Website</option>
+                                            <option value="sales">Sales</option>
+                                            <option value="asosiasi">Asosiasi</option>
+                                            <option value="medsos">Media sosial</option>
+                                            <option value="relasi">Kerabat/Relasi</option>
+                                            <option value="lainnya">Lainnya</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- <div class="form-group col-lg-12">
+                                        <label for="score">Seberapa besar kemungkinan Anda merekomendasikan Perusahaan kami kepada rekan kerja dan kolega?</label>
+                                        <input type="range" id="score" name="score" min="0" max="10" step="1" value="10" class="form-control-range" oninput="updateScoreValue(this.value)" />
+                                        <span id="score_value">10</span>
+                                    </div> -->
+
+                                    <div class="form-group col-lg-12">
+                                        <label>Seberapa besar kemungkinan Anda merekomendasikan Perusahaan kami kepada rekan kerja dan kolega?</label>
+
+                                        <!-- Container untuk Angka 1 - 10 -->
+                                        <div class="score-container d-flex justify-content-between">
+                                            <input type="radio" name="score" id="score1" value="01" />
+                                            <label for="score1">1</label>
+
+                                            <input type="radio" name="score" id="score2" value="02" />
+                                            <label for="score2">2</label>
+
+                                            <input type="radio" name="score" id="score3" value="03" />
+                                            <label for="score3">3</label>
+
+                                            <input type="radio" name="score" id="score4" value="04" />
+                                            <label for="score4">4</label>
+
+                                            <input type="radio" name="score" id="score5" value="05" />
+                                            <label for="score5">5</label>
+
+                                            <input type="radio" name="score" id="score6" value="06" />
+                                            <label for="score6">6</label>
+
+                                            <input type="radio" name="score" id="score7" value="07" />
+                                            <label for="score7">7</label>
+
+                                            <input type="radio" name="score" id="score8" value="08" />
+                                            <label for="score8">8</label>
+
+                                            <input type="radio" name="score" id="score9" value="09" />
+                                            <label for="score9">9</label>
+
+                                            <input type="radio" name="score" id="score10" value="10" />
+                                            <label for="score10">10</label>
+                                        </div>
+                                        <input type="hidden" id="score" name="score"/>
+                                    </div>
+                                    <span class="score-label">Sama sekali tidak</span>
+                                    <span class="score-right">Pasti rekomendasi</span>
+
+                                    <div class="form-group col-lg-12 mt-4">
+                                        <label for="saran_5">Mohon saran /masukan terkait dengan peluang peningkatan pelayanan kami</label>
+                                        <input type="text" class="form-control" name="saran_5" id="saran_5" placeholder="Masukkan jawaban anda" />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="margin-top: 50px">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>    
+            </t>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script type="text/javascript">
+                document.addEventListener('DOMContentLoaded', function () {
+                    const checkboxes = document.querySelectorAll('.iso-standard-checkbox');
+                    const othersCheckbox = document.getElementById('iso_standardx_others');
+                    const errorMessage = document.getElementById('iso_standard_error');
+
+                    function getCheckedValues() {
+                        let checkedValues = [];
+                        
+                        checkboxes.forEach(function (checkbox) {
+                            if (checkbox.checked) {
+                                checkedValues.push(checkbox.value);
+                            }
+                        });
+
+                        return checkedValues;
+                    }
+
+                    const form = document.querySelector('form'); 
+
+                    othersCheckbox.addEventListener('change', function () {
+                        if (othersCheckbox.checked) {
+                            errorMessage.style.display = 'none'; 
+                        }
+                    });
+                    
+                    form.addEventListener('submit', function (e) {
+                        const checkedValues = getCheckedValues();
+                        
+                        if (checkedValues.length === 0 &amp; !othersCheckbox.checked) {
+                            e.preventDefault(); 
+                            alert("Please select at least one ISO Standard.");
+                        } else {
+                            console.log("Checkbox yang dicentang:", checkedValues);
+                        }
+                    });
+
+
+                    function toggleVisibility() {
+                        //Standard others
+                        const othersCheckbox = document.getElementById('iso_standardx_others');
+                        const othersInputContainer = document.getElementById('iso_standard_others_input');
+                        const othersInput = document.getElementById('other_standard');
+
+                        othersCheckbox.addEventListener('change', function() {
+                            if (this.checked) {
+                                othersInputContainer.style.display = 'block';
+                            } else {
+                                othersInputContainer.style.display = 'none';
+                                othersInput.value = '';
+                            }
+                        });
+                        // Validasi input standard others
+                        const form = document.querySelector('form');
+                        form.addEventListener('submit', function(e) {
+                            if (othersCheckbox.checked &amp; othersInput.value.trim() === '') {
+                                e.preventDefault();
+                                alert("Please fill out the 'Others' field.");
+                                othersInput.focus();
+                            }
+                        });
+
+                    }
+                    
+                    const radioButtons = document.querySelectorAll('input[type="radio"]');
+                    radioButtons.forEach(function (radio) {
+                        radio.addEventListener('change', toggleVisibility);
+                    });
+
+                    toggleVisibility();
+
+                    const slider = document.getElementById('score');
+                    const scoreValue = document.getElementById('score_value');
+                    slider.addEventListener('input', function() {
+                        scoreValue.textContent = slider.value;
+                    });
+
+                });
+
+                function adjustInputWidth() {
+                    var inputs = document.querySelectorAll('.input-dynamic');
+                    inputs.forEach(function(input) {
+                        var tempSpan = document.createElement('span');
+                        tempSpan.style.visibility = 'hidden';
+                        tempSpan.style.whiteSpace = 'pre';
+                        tempSpan.style.font = getComputedStyle(input).font;
+                        tempSpan.textContent = input.value || input.placeholder;
+                        document.body.appendChild(tempSpan);
+                        input.style.width = (tempSpan.offsetWidth + 10) + 'px'; 
+                        document.body.removeChild(tempSpan);
+                    });
+                }
+
+                document.addEventListener('input', function(event) {
+                    if (event.target.classList.contains('input-dynamic')) {
+                        adjustInputWidth();
+                    }
+                });
+
+                document.querySelectorAll('.star').forEach((star) =&gt; {
+                    star.addEventListener('change', function () {
+                        // Ambil nama grup (question_1, question_2, question_3, question_4)
+                        const questionName = this.name;
+
+                        // Cari input hidden berdasarkan nama
+                        const hiddenInput = document.querySelector(`#${questionName}_hidden`);
+
+                        // Set nilai input hidden dengan nilai bintang yang dipilih
+                        if (hiddenInput) {
+                            hiddenInput.value = this.value;
+                        }
+                    });
+                });
+
+                function updateScoreValue(value) {
+                    document.getElementById('score_value').textContent = value;
+                }
+
+                window.addEventListener('load', adjustInputWidth);
+                
+            </script>
+        </template>
+
+        <template id="survey_form_success" name="CRM Survey Pelanggan">
+            <t t-call="website.layout">
+                <div id="wrap" class="d-flex justify-content-center align-items-center">
+                    <div class="container">
+                        <div class="col-md-12 text-center">
+                            <h1 class="mt-4 mb-4">Terimakasih sudah mengisi dan meluangkan waktu anda untuk mengisi Survey Kepuasan Layanan</h1>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

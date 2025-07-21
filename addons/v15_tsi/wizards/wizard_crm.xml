@@ -1,0 +1,177 @@
+<odoo>
+
+	<record id="tsi_wizard_lanjut_view" model="ir.ui.view">
+		<field name="name">Request for Lanjut</field>
+		<field name="model">tsi.wizard_lanjut</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="partner_id"/>
+					<field name="iso_standard_ids" widget="many2many_tags"/>
+                    <!-- <field name="tahapan_audit_ids" widget="many2many_tags"/> -->
+					<field name="sales"/>
+					<!-- <field name="associate"/>
+					<field name="category"/> -->
+					<field name="segment" widget="many2many_tags"/>
+					<!-- <field name="pic"/>
+					<field name="akreditasi"/>
+					<field name="alamat"/>
+					<field name="closing_by"/>
+					<field name="level_audit"/>
+					<field name="level_audit_ispo"/>
+					<field name="referal"/> -->
+				</group>
+				<notebook>
+					<page string="Lines CRM Lanjut">
+						<group>
+							<field name="line_ids" nolabel="1">
+								<tree editable="bottom">
+									<field name="iso_standard_ids" widget="many2many_tags"/>
+									<field name="nomor_kontrak" />
+									<field name="tanggal_kontrak" />
+									<field name="accreditation"/>
+									<field name="tahapan_audit"/>
+									<field name="nilai"/>
+								</tree>
+								<form>
+									<group>
+										<field name="iso_standard_ids"/>
+										<field name="nomor_kontrak" />
+										<field name="tanggal_kontrak" />
+										<field name="accreditation"/>
+										<field name="tahapan_audit"/>
+										<field name="nilai"/>
+									</group>
+								</form>
+							</field>
+						</group>
+					</page>
+				</notebook>
+
+				<footer>
+					<button name="send" string="Confirm" class="btn-primary" type="object" />
+					<button string="Cancel" class="btn-secondary" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="tsi_wizard_suspend_view" model="ir.ui.view">
+		<field name="name">Wizard CRM Suspend</field>
+		<field name="model">tsi.wizard_suspend</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="partner_id"/>
+					<field name="iso_standard_ids" widget="many2many_tags"/>
+                    <!-- <field name="tahapan_audit_ids" widget="many2many_tags"/> -->
+					<field name="sales"/>
+					<!-- <field name="associate"/>
+					<field name="category"/> -->
+					<field name="segment" widget="many2many_tags"/>
+					<!-- <field name="pic"/>
+					<field name="akreditasi"/>
+					<field name="alamat"/>
+					<field name="closing_by"/>
+					<field name="level_audit"/>
+					<field name="level_audit_ispo"/>
+					<field name="referal"/> -->
+				</group>
+				<group>
+					<field name="alasan" />
+				</group>
+				<notebook>
+					<page string="Lines CRM Suspend">
+						<group>
+							<field name="line_ids" nolabel="1">
+								<tree editable="bottom">
+									<field name="iso_standard_ids" widget="many2many_tags"/>
+									<field name="nomor_kontrak" />
+									<field name="tanggal_kontrak" />
+									<field name="accreditation"/>
+									<field name="tahapan_audit"/>
+									<field name="nilai"/>
+								</tree>
+								<form>
+									<group>
+										<field name="iso_standard_ids"/>
+										<field name="nomor_kontrak" />
+										<field name="tanggal_kontrak" />
+										<field name="accreditation"/>
+										<field name="tahapan_audit"/>
+										<field name="nilai"/>
+									</group>
+								</form>
+							</field>
+						</group>
+					</page>
+				</notebook>
+
+				<footer>
+					<button name="send" string="Confirm" class="btn-primary" type="object" />
+					<button string="Cancel" class="btn-secondary" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="tsi_wizard_loss_view" model="ir.ui.view">
+		<field name="name">Wizard CRM Loss</field>
+		<field name="model">tsi.wizard_loss</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="partner_id"/>
+					<field name="iso_standard_ids" widget="many2many_tags"/>
+                    <!-- <field name="tahapan_audit_ids" widget="many2many_tags"/> -->
+					<field name="sales"/>
+					<!-- <field name="associate"/>
+					<field name="category"/> -->
+					<field name="segment" widget="many2many_tags"/>
+					<!-- <field name="pic"/>
+					<field name="akreditasi"/>
+					<field name="alamat"/>
+					<field name="closing_by"/>
+					<field name="level_audit"/>
+					<field name="level_audit_ispo"/>
+					<field name="referal"/> -->
+				</group>
+				<group>
+					<field name="alasan" />
+				</group>
+				<notebook>
+					<page string="Lines CRM Loss">
+						<group>
+							<field name="line_ids" nolabel="1">
+								<tree editable="bottom">
+									<field name="iso_standard_ids" widget="many2many_tags"/>
+									<field name="nomor_kontrak" />
+									<field name="tanggal_kontrak" />
+									<field name="accreditation"/>
+									<field name="tahapan_audit"/>
+									<field name="nilai"/>
+								</tree>
+								<form>
+									<group>
+										<field name="iso_standard_ids"/>
+										<field name="nomor_kontrak" />
+										<field name="tanggal_kontrak" />
+										<field name="accreditation"/>
+										<field name="tahapan_audit"/>
+										<field name="nilai"/>
+									</group>
+								</form>
+							</field>
+						</group>
+					</page>
+				</notebook>
+
+				<footer>
+					<button name="send" string="Confirm" class="btn-primary" type="object" />
+					<button string="Cancel" class="btn-secondary" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+</odoo>

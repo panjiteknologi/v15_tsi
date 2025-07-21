@@ -1,0 +1,438 @@
+<odoo>
+    <data>
+
+        <!-- tsi.hazard form view -->
+        <record id="tsi_hazard_view_form" model="ir.ui.view">
+            <field name="name">tsi.hazard.view.form</field>
+            <field name="model">tsi.hazard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.hazard tree view -->
+        <record id="tsi_hazard_view_tree" model="ir.ui.view">
+            <field name="name">tsi.hazard.view.tree</field>
+            <field name="model">tsi.hazard</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.hazard action window -->
+        <record id="tsi_hazard_action" model="ir.actions.act_window">
+            <field name="name">Hazard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.hazard</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="tsi_env_aspect_view_form" model="ir.ui.view">
+            <field name="name">tsi.env_aspect.view.form</field>
+            <field name="model">tsi.env_aspect</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.env_aspect tree view -->
+        <record id="tsi_env_aspect_view_tree" model="ir.ui.view">
+            <field name="name">tsi.env_aspect.view.tree</field>
+            <field name="model">tsi.env_aspect</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.env_aspect action window -->
+        <record id="tsi_env_aspect_action" model="ir.actions.act_window">
+            <field name="name">Env Aspect</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.env_aspect</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+
+
+        <!-- tsi.hazard form view -->
+        <record id="tsi_hazard_view_form" model="ir.ui.view">
+            <field name="name">tsi.hazard.view.form</field>
+            <field name="model">tsi.hazard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.alt_scope tree view -->
+        <record id="tsi_alt_scope_view_tree" model="ir.ui.view">
+            <field name="name">tsi.alt_scope.view.tree</field>
+            <field name="model">tsi.alt_scope</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.alt_scope action window -->
+        <record id="tsi_alt_scope_action" model="ir.actions.act_window">
+            <field name="name">Alt Scope</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.alt_scope</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.ispo.peta form view -->
+        <record id="tipe_peta_ispo_form" model="ir.ui.view">
+            <field name="name">tipe.peta.ispo.view.form</field>
+            <field name="model">tipe.peta.ispo</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.alt_scope tree view -->
+        <record id="tipe_peta_ispo_view_tree" model="ir.ui.view">
+            <field name="name">tsi.alt_scope.view.tree</field>
+            <field name="model">tipe.peta.ispo</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tipe.peta.ispo action window -->
+        <record id="tipe_peta_ispo_action" model="ir.actions.act_window">
+            <field name="name">Tipe Peta</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tipe.peta.ispo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- ispo.finding.type form view -->
+        <record id="ispo_finding_type_view_form" model="ir.ui.view">
+            <field name="name">ispo.finding.type.view.form</field>
+            <field name="model">ispo.finding.type</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ispo.finding.type tree view -->
+        <record id="ispo_finding_type_view_tree" model="ir.ui.view">
+            <field name="name">ispo.finding.type.view.tree</field>
+            <field name="model">ispo.finding.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- ispo.finding.type action window -->
+        <record id="ispo_finding_type_action" model="ir.actions.act_window">
+            <field name="name">Finding Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ispo.finding.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- Grafik -->
+        <record id="view_pencapaian_chart_crm" model="ir.ui.view">
+            <field name="name">chart.target.actual.graph</field>
+            <field name="model">chart.target.actual</field>
+            <field name="arch" type="xml">
+                <graph string="Pencapaian CRM" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="issue_date" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="tipe" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_pencapaian_chart_crm" model="ir.actions.act_window">
+            <field name="name">Pencapaian CRM</field>
+            <field name="res_model">chart.target.actual</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_pencapaian_chart_crm"/>
+        </record>
+
+        <!-- Actual Vs Target ISO -->
+        <record id="view_pencapaian_chart_iso" model="ir.ui.view">
+            <field name="name">chart.target.actual.graph</field>
+            <field name="model">chart.target.actual</field>
+            <field name="arch" type="xml">
+                <graph string="Graph - Actual Vs Target ISO" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="issue_date" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="tipe" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_pencapaian_chart_iso" model="ir.actions.act_window">
+            <field name="name">Graph - Actual Vs Target ISO</field>
+            <field name="res_model">chart.target.actual</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_pencapaian_chart_iso"/>
+        </record>
+
+        <!-- Actual Vs Target ISPO -->
+        <record id="view_pencapaian_chart_ispo" model="ir.ui.view">
+            <field name="name">chart.target.actual.ispo.graph</field>
+            <field name="model">chart.target.actual.ispo</field>
+            <field name="arch" type="xml">
+                <graph string="Graph - Actual Vs Target ISPO" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="issue_date" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="tipe" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_pencapaian_chart_ispo" model="ir.actions.act_window">
+            <field name="name">Graph - Actual Vs Target ISPO</field>
+            <field name="res_model">chart.target.actual.ispo</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_pencapaian_chart_ispo"/>
+        </record>
+
+        <!-- Compare Achievement -->
+        <record id="view_compare_achievement" model="ir.ui.view">
+            <field name="name">pencapaian.chart.crm.graph</field>
+            <field name="model">pencapaian.chart.crm</field>
+            <field name="arch" type="xml">
+                <graph string="Graph - Compare Achievement" type="line">
+                    <field name="issue_month" type="col"/>
+                    <field name="issue_year" type="row"/>
+                    <field name="price" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_compare_achievement" model="ir.actions.act_window">
+            <field name="name">Graph - Compare Achievement</field>
+            <field name="res_model">pencapaian.chart.crm</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_compare_achievement"/>
+        </record>
+
+        <!-- Status dan Harga -->
+        <record id="view_status_harga" model="ir.ui.view">
+            <field name="name">pencapaian.chart.crm.graph</field>
+            <field name="model">pencapaian.chart.crm</field>
+            <field name="arch" type="xml">
+                <graph string="Graph - Status dan Harga" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="issue_date" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="state_crm" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_status_harga" model="ir.actions.act_window">
+            <field name="name">Graph - Status dan Harga</field>
+            <field name="res_model">pencapaian.chart.crm</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_status_harga"/>
+        </record>
+
+        <!-- Kategori dan Harga -->
+        <record id="view_kategori_harga" model="ir.ui.view">
+            <field name="name">pencapaian.chart.crm.graph</field>
+            <field name="model">pencapaian.chart.crm</field>
+            <field name="arch" type="xml">
+                <graph string="Graph - Kategori dan Harga" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="issue_date" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="category" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_kategori_harga" model="ir.actions.act_window">
+            <field name="name">Graph - Kategori dan Harga</field>
+            <field name="res_model">pencapaian.chart.crm</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_kategori_harga"/>
+        </record>
+
+        <!-- Level Audit dan Harga ISO -->
+        <record id="view_level_audit_harga" model="ir.ui.view">
+            <field name="name">pencapaian.chart.crm.graph</field>
+            <field name="model">pencapaian.chart.crm</field>
+            <field name="arch" type="xml">
+                <graph string="Graph - Level Audit dan Harga ISO" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="issue_date" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="audit_stage" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_level_audit_harga" model="ir.actions.act_window">
+            <field name="name">Graph - Level Audit dan Harga ISO</field>
+            <field name="res_model">pencapaian.chart.crm</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_level_audit_harga"/>
+        </record>
+
+        <!-- Level Audit dan Harga ISPO -->
+        <record id="view_level_audit_harga_ispo" model="ir.ui.view">
+            <field name="name">pencapaian.chart.crm.ispo.graph</field>
+            <field name="model">pencapaian.chart.crm.ispo</field>
+            <field name="arch" type="xml">
+                <graph string="Graph - Level Audit dan Harga ISPO" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="issue_date" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="audit_stage" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_level_audit_harga_ispo" model="ir.actions.act_window">
+            <field name="name">Graph - Level Audit dan Harga ISPO</field>
+            <field name="res_model">pencapaian.chart.crm.ispo</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_level_audit_harga_ispo"/>
+        </record>
+
+        <!-- Referal dan Harga -->
+        <record id="view_referal_harga" model="ir.ui.view">
+            <field name="name">pencapaian.chart.crm.graph</field>
+            <field name="model">pencapaian.chart.crm</field>
+            <field name="arch" type="xml">
+                <graph string="Graph - Referal dan Harga" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="issue_date" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="referal" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_referal_harga" model="ir.actions.act_window">
+            <field name="name">Graph - Referal dan Harga</field>
+            <field name="res_model">pencapaian.chart.crm</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_referal_harga"/>
+        </record>
+
+        <!-- Sales Person dan Harga -->
+        <record id="view_sales_harga" model="ir.ui.view">
+            <field name="name">pencapaian.chart.crm.graph</field>
+            <field name="model">pencapaian.chart.crm</field>
+            <field name="arch" type="xml">
+                <graph string="Graph - Sales Person dan Harga" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="issue_date" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="sales" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_sales_harga" model="ir.actions.act_window">
+            <field name="name">Graph - Sales Person dan Harga</field>
+            <field name="res_model">pencapaian.chart.crm</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_sales_harga"/>
+        </record>
+
+        <!-- Closing By dan Harga -->
+        <record id="view_closing_by_harga" model="ir.ui.view">
+            <field name="name">pencapaian.chart.crm.graph</field>
+            <field name="model">pencapaian.chart.crm</field>
+            <field name="arch" type="xml">
+                <graph string="Graph - Closing By dan Harga" type="bar" stacked="False" js_class="custom_graph">
+                    <field name="issue_date" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="closing_by" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_closing_by_harga" model="ir.actions.act_window">
+            <field name="name">Graph - Closing By dan Harga</field>
+            <field name="res_model">pencapaian.chart.crm</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_closing_by_harga"/>
+        </record>
+
+    </data>
+</odoo>

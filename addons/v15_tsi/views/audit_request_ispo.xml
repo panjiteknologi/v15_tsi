@@ -1,0 +1,230 @@
+<odoo>
+    <data>
+
+        <!-- tsi.audit.request tree view -->
+        <record id="tsi_audit_request_ispo_view_tree" model="ir.ui.view">
+            <field name="name">tsi.audit.request.ispo.view.tree</field>
+            <field name="model">tsi.audit.request.ispo</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button name="create_quotation" string="Create Quotation" type="object" />
+                    </header>
+
+                    <field name="name"/>
+                    <!-- <field name="audit_stage"/> -->
+                    <field name="partner_id"/>
+                    <field name="issue_date" />
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                    <field name="pic_crm" />
+                    <field name="tgl_perkiraan_audit_selesai" />
+                    <!-- <field name="user_id" optional="show" widget="many2one_avatar_user"/> -->
+                    <!-- <field name="telp"/>
+                    <field name="email"/> -->
+                    <!-- <field name="website"/>
+                    <field name="cellular"/>
+                    <field name="mandays"/> -->
+                    <field name="state_sales" decoration-success="state_sales == 'sale' or state_sales == 'done'" decoration-info="state_sales == 'draft' or state_sales == 'sent'" decoration-danger = "state_sales == 'cancel'" widget="badge" placeholder="New"/>
+                    <field name="state" widget="badge" decoration-success = "state == 'approve'" decoration-info = "state == 'revice'" decoration-danger = "state == 'reject'"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi_audit_request form view -->
+        <record id="tsi_audit_request_ispo_view_form" model="ir.ui.view">
+            <field name="name">tsi.audit.request.ispo.view.form</field>
+            <field name="model">tsi.audit.request.ispo</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="set_reject" string="Reject"   states="request,revice,approve" type="object" class="oe_highlight" />
+                        <button name="set_approve" string="Approve" states="request,revice" type="object" class="oe_highlight" />
+                        <button name="set_revice" string="Revise" states="reject" type="object" />
+                        <!-- <button name="set_request" string="Request" states="reject" type="object" class="oe_highlight" /> -->
+                        <button name="generate_ops" string="Create Audit" states="approve" type="object" />
+                        <!-- <button name="create_sales" states="approve" string="Create Sales Order" type="object" class="oe_highlight" /> -->
+                        <!-- <button name="create_quot" states="approve" string="Create Quotation" type="object" class="oe_highlight"/> -->
+                        <field name="state" widget="statusbar" statusbar_visible="request,approve"/>
+
+                    </header>
+
+                    <sheet>
+                        <group>
+                            <field name="cycle" />
+                            <field name="audit_stage" widget="radio" options="{'horizontal': true}" attrs="{'invisible': [('cycle', '!=', 'cycle1')]}"/>
+                            <field name="audit_stage2" widget="radio" options="{'horizontal': true}" attrs="{'invisible': [('cycle', '!=', 'cycle2')]}"/>
+                            <field name="audit_stage3" widget="radio" options="{'horizontal': true}" attrs="{'invisible': [('cycle', '!=', 'cycle3')]}"/>
+                        </group>
+                        <group col="4">
+                            <!-- <field name="reference" /> -->
+                            <field name="issue_date" />
+                            <field name="user_id" />
+                        </group>
+                        <group col="4" string="General Company Information">
+                            <field name="reference" string="Company Name"/>
+                            <!-- <field name="partner_id"/> -->
+                            <field name="office_address"/>
+                            <field name="invoicing_address"/>
+                            <field name="telp"/>
+                            <field name="email"/>
+                            <field name="website"/>
+                            <field name="closing_by"/>
+                            <field name="category" />
+					        <field name="note" />
+                        </group>
+                        <group col="4" string="Direct" attrs="{'invisible': [('closing_by', '!=', 'direct')]}">
+                            <field name="pic_direct" />
+                            <field name="transport_by" />
+                            <field name="email_direct" />
+                            <field name="tipe_klien_transport" attrs="{'invisible': [('transport_by', '!=', 'klien')]}" />
+                            <field name="phone_direct" />
+                            <field name="hotel_by" />
+                            <field name="show_ispo" attrs="{'invisible':True}"/>
+                            <field name="tipe_klien_hotel" attrs="{'invisible': [('hotel_by', '!=', 'klien')]}" />
+                        </group>
+                        <group col="4" string="Konsultan" attrs="{'invisible': [('closing_by', '!=', 'konsultan')]}">
+                            <field name="pic_konsultan1" />
+                            <field name="transport_by" />
+                            <field name="email_konsultan" />
+                            <field name="tipe_klien_transport" attrs="{'invisible': [('transport_by', '!=', 'klien')]}" />
+                            <field name="phone_konsultan" />
+                            <field name="hotel_by" />
+                            <field name="cellular" invisible="1" />
+                            <field name="tipe_klien_hotel" attrs="{'invisible': [('hotel_by', '!=', 'klien')]}" />
+                        </group>
+                        <group col="4" string="Management system standard(s)">
+                            <field name="iso_standard_ids" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+                            <field name="no_kontrak" groups="v15_tsi.group_menu_line_initial"/>
+                            <field name="number_site"/>
+                            <field name="sales" />
+                            <field name="tgl_perkiraan_audit_selesai"/>
+                        </group>
+                        <group col="4" string="Scope and Boundaries">
+                            <field name="scope"/>
+                            <field name="boundaries"/>
+                        </group>    
+                        <!-- ISPO -->
+                        <group col="4" string="Additional Info for ISPO" attrs="{'invisible':[('show_ispo', '=', False)]}">
+                            <field name="accreditation_ispo" options="{'no_create': True, 'no_edit': True}"/>
+                            <field name="ea_code_ispo" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+                        </group>
+                        <group string="Informasi Sites" attrs="{'invisible':[('show_ispo', '=', False)]}">
+                            <field name="site_ids_ispo" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="tipe_site"/>
+                                    <field name="address"/>
+                                    <field name="effective_emp"/>
+                                    <field name="total_emp"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="tipe_site"/>
+                                        <field name="address"/>
+                                        <field name="effective_emp"/>
+                                        <field name="total_emp"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group string="Informasi Mandays" attrs="{'invisible':[('show_ispo', '=', False)]}">
+                            <field name="mandays_ids_ispo" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification" />
+                                    <field name="surveilance_3"/>
+                                    <field name="surveilance_4"/>
+                                    <field name="recertification_2"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification" />
+                                        <field name="surveilance_3"/>
+                                        <field name="surveilance_4"/>
+                                        <field name="recertification_2"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>              
+                        <notebook>
+                            <page string="Audit Request Lines" groups="v15_tsi.group_menu_line_initial">
+                                <group>
+                                    <field name="lines_audit_request" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="product_id"/>
+                                            <field name="audit_tahapan"/>
+                                            <field name="tahun"/>
+                                            <field name="price"/>
+                                            <field name="fee"/>
+                                            <field name="percentage"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="audit_tahapan"/>
+                                                <field name="tahun"/>
+                                                <field name="price"/>
+                                                <field name="fee"/>
+                                                <field name="percentage"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="Reference" string="Reference">
+                                <group col="4">
+                                    <!-- <field name="crm_reference"/> -->
+                                    <field name="ispo_reference"/>
+                                    <field name="sales_reference"/>
+                                    <field name="review_reference_ispo"  widget="many2many_tags"/>
+                                    <field name="ispo_notification"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.audit.request action window -->
+        <record id="tsi_audit_request_ispo_action" model="ir.actions.act_window">
+            <field name="name">Audit Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.audit.request.ispo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.sequence" id="audit_request_ispo_seq">
+            <field name="name">Request</field>
+            <field name="code">tsi.audit.request.ispo</field>
+            <field name="prefix">REQ</field>
+            <field name="padding">7</field>
+            <field name="company_id" eval="False" />
+        </record>
+    </data>
+</odoo>

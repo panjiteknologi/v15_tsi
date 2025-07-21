@@ -1,0 +1,1308 @@
+<odoo>
+
+	<record id="tsi_wizard_audit_view" model="ir.ui.view">
+		<field name="name">Request for Audit</field>
+		<field name="model">tsi.wizard_audit</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="cycle" />
+					<field name="cycle1" widget="radio" options="{'horizontal': true}" attrs="{'invisible': [('cycle', '!=', 'cycle1')]}"/>
+					<field name="cycle2" widget="radio" options="{'horizontal': true}" attrs="{'invisible': [('cycle', '!=', 'cycle2')]}"/>
+					<field name="cycle3" widget="radio" options="{'horizontal': true}" attrs="{'invisible': [('cycle', '!=', 'cycle3')]}"/>
+					<!-- <field name="audit_stage" widget="radio" options="{'horizontal': true}"/> -->
+				</group>
+				<group col="4" string="General Company Information">
+					<field name="partner_id"/>
+					<field name="office_address"/>
+					<field name="invoicing_address"/>
+					<field name="telp"/>
+					<field name="email"/>
+					<field name="website"/>
+					<field name="closing_by"/>
+					<field name="category" />
+					<field name="pic_crm" />
+					<field name="note" />
+				</group>
+				<group col="4" string="Direct" attrs="{'invisible': [('closing_by', '!=', 'direct')]}">
+					<field name="pic_direct" />
+					<field name="transport_by" />
+					<field name="email_direct" />
+					<field name="tipe_klien_transport" attrs="{'invisible': [('transport_by', '!=', 'klien')]}" />
+					<field name="phone_direct" />
+					<field name="hotel_by" />
+					<field name="show_9001" attrs="{'invisible':True}"/>
+					<field name="tipe_klien_hotel" attrs="{'invisible': [('hotel_by', '!=', 'klien')]}" />
+				</group>
+				<group col="4" string="Konsultan" attrs="{'invisible': [('closing_by', '!=', 'konsultan')]}">
+					<field name="pic_konsultan1" />
+					<field name="transport_by" />
+					<field name="email_konsultan" />
+					<field name="tipe_klien_transport" attrs="{'invisible': [('transport_by', '!=', 'klien')]}" />
+					<field name="phone_konsultan" />
+					<field name="hotel_by" />
+					<field name="show_14001" attrs="{'invisible':True}"/>
+					<field name="tipe_klien_hotel" attrs="{'invisible': [('hotel_by', '!=', 'klien')]}" />
+				</group>
+				<group col="4" string="Management system standard(s)">
+					<field name="iso_standard_ids" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="no_kontrak"/>
+					<field name="number_site"/>
+					<field name="sales" />
+					<field name="tgl_perkiraan_audit_selesai"/>
+                	<field name="tgl_perkiraan_selesai" invisible="1"/>
+					<field name="show_45001" attrs="{'invisible':True}"/>
+					<field name="show_27001" attrs="{'invisible':True}"/>
+					<field name="show_27701" attrs="{'invisible':True}"/>
+					<field name="show_27017" attrs="{'invisible':True}"/>
+					<field name="show_27018" attrs="{'invisible':True}"/>
+					<field name="show_27001_2022" attrs="{'invisible':True}"/>
+					<field name="show_haccp" attrs="{'invisible':True}"/>
+					<field name="show_gmp" attrs="{'invisible':True}"/>
+					<field name="show_22000" attrs="{'invisible':True}"/>
+					<field name="show_22301" attrs="{'invisible':True}"/>
+					<field name="show_31000" attrs="{'invisible':True}"/>
+					<field name="show_9994" attrs="{'invisible':True}"/>
+					<field name="show_37001" attrs="{'invisible':True}"/>
+					<field name="show_13485" attrs="{'invisible':True}"/>
+					<field name="show_smk" attrs="{'invisible':True}"/>
+					<field name="show_21000" attrs="{'invisible':True}"/>
+					<field name="show_37301" attrs="{'invisible':True}"/>
+					<field name="show_21001" attrs="{'invisible':True}"/>
+					<field name="show_31001" attrs="{'invisible':True}"/>
+					<field name="show_ispo" attrs="{'invisible':True}"/>
+				</group>
+				<group col="4" string="Scope and Boundaries">
+					<field name="scope"/>
+					<field name="boundaries" />
+				</group>
+				<!-- ISO 9001 -->
+				<group col="4" string="Additional Information for ISO 9001" attrs="{'invisible':[('show_9001', '=', False)]}">
+					<field name="accreditation_9001" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_9001" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_9001', '=', False)]}">
+					<field name="site_ids" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_9001', '=', False)]}">
+					<field name="mandays_ids" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 14001 -->
+				<group col="4" string="Additional Info for ISO 14001" attrs="{'invisible':[('show_14001', '=', False)]}">
+					<field name="accreditation_14001" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_14001" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_14001', '=', False)]}">
+					<field name="site_ids_14001" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_14001', '=', False)]}">
+					<field name="mandays_ids_14001" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 45001 -->
+				<group col="4" string="Additional Information for ISO 45001" attrs="{'invisible':[('show_45001', '=', False)]}">
+					<field name="accreditation_45001" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_45001" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_45001', '=', False)]}">
+					<field name="site_ids_45001" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_45001', '=', False)]}">
+					<field name="mandays_ids_45001" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 37001 -->
+				<group col="4" string="Additional Info for ISO 37001" attrs="{'invisible':[('show_37001', '=', False)]}">
+					<field name="accreditation_37001" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_37001" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_37001', '=', False)]}">
+					<field name="site_ids_37001" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_37001', '=', False)]}">
+					<field name="mandays_ids_37001" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 13485 -->
+				<group col="4" string="Additional Information for ISO 13485" attrs="{'invisible':[('show_13485', '=', False)]}">
+					<field name="accreditation_13485" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_13485" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_13485', '=', False)]}">
+					<field name="site_ids_13485" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_13485', '=', False)]}">
+					<field name="mandays_ids_13485" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 21000 -->
+				<group col="4" string="Additional Info for ISO 21000" attrs="{'invisible':[('show_21000', '=', False)]}">
+					<field name="accreditation_21000" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_21000" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_21000', '=', False)]}">
+					<field name="site_ids_21000" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_21000', '=', False)]}">
+					<field name="mandays_ids_21000" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- SMK -->
+				<group col="4" string="Additional Information for SMK" attrs="{'invisible':[('show_smk', '=', False)]}">
+					<field name="accreditation_smk" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_smk" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_smk', '=', False)]}">
+					<field name="site_ids_smk" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_smk', '=', False)]}">
+					<field name="mandays_ids_smk" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- GMP -->
+				<group col="4" string="Additional Information for GMP" attrs="{'invisible':[('show_gmp', '=', False)]}">
+					<field name="accreditation_gmp" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_gmp" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_gmp', '=', False)]}">
+					<field name="site_ids_gmp" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_gmp', '=', False)]}">
+					<field name="mandays_ids_gmp" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 22000 -->
+				<group col="4" string="Additional Info for ISO 22000" attrs="{'invisible':[('show_22000', '=', False)]}">
+					<field name="accreditation_22000" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_22000" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_22000', '=', False)]}">
+					<field name="site_ids_22000" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_22000', '=', False)]}">
+					<field name="mandays_ids_22000" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- HACCP -->
+				<group col="4" string="Additional Info for HACCP" attrs="{'invisible':[('show_haccp', '=', False)]}">
+					<field name="accreditation_haccp" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_haccp" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_haccp', '=', False)]}">
+					<field name="site_ids_haccp" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_haccp', '=', False)]}">
+					<field name="mandays_ids_haccp" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 27001 -->
+				<group col="4" string="Additional Info for ISO 27001" attrs="{'invisible':[('show_27001', '=', False)]}">
+					<field name="accreditation_27001" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_27001" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_27001', '=', False)]}">
+					<field name="site_ids_27001" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_27001', '=', False)]}">
+					<field name="mandays_ids_27001" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 27001 : 2022 -->
+				<group col="4" string="Additional Info for ISO 27001 : 2022" attrs="{'invisible':[('show_27001_2022', '=', False)]}">
+					<field name="accreditation_27001_2022" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_27001_2022" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_27001_2022', '=', False)]}">
+					<field name="site_ids_27001_2022" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_27001_2022', '=', False)]}">
+					<field name="mandays_ids_27001_2022" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 27701 -->
+				<group col="4" string="Additional Info for ISO 27701" attrs="{'invisible':[('show_27701', '=', False)]}">
+					<field name="accreditation_27701" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_27701" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_27701', '=', False)]}">
+					<field name="site_ids_27701" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_27701', '=', False)]}">
+					<field name="mandays_ids_27701" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 27017 -->
+				<group col="4" string="Additional Info for ISO 27017" attrs="{'invisible':[('show_27017', '=', False)]}">
+					<field name="accreditation_27017" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_27017" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_27017', '=', False)]}">
+					<field name="site_ids_27017" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_27017', '=', False)]}">
+					<field name="mandays_ids_27017" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 27018 -->
+				<group col="4" string="Additional Info for ISO 27018" attrs="{'invisible':[('show_27018', '=', False)]}">
+					<field name="accreditation_27018" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_27018" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_27018', '=', False)]}">
+					<field name="site_ids_27018" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_27018', '=', False)]}">
+					<field name="mandays_ids_27018" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 31000 -->
+				<group col="4" string="Additional Info for ISO 31000" attrs="{'invisible':[('show_31000', '=', False)]}">
+					<field name="accreditation_31000" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_31000" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_31000', '=', False)]}">
+					<field name="site_ids_31000" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_31000', '=', False)]}">
+					<field name="mandays_ids_31000" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 22301 -->
+				<group col="4" string="Additional Info for ISO 22301" attrs="{'invisible':[('show_22301', '=', False)]}">
+					<field name="accreditation_22301" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_22301" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_22301', '=', False)]}">
+					<field name="site_ids_22301" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_22301', '=', False)]}">
+					<field name="mandays_ids_22301" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 9994 -->
+				<group col="4" string="Additional Info for ISO 9994" attrs="{'invisible':[('show_9994', '=', False)]}">
+					<field name="accreditation_9994" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_9994" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_9994', '=', False)]}">
+					<field name="site_ids_9994" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_9994', '=', False)]}">
+					<field name="mandays_ids_9994" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 37301 -->
+				<group col="4" string="Additional Info for ISO 37301" attrs="{'invisible':[('show_37301', '=', False)]}">
+					<field name="accreditation_37301" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_37301" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_37301', '=', False)]}">
+					<field name="site_ids_37301" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_37301', '=', False)]}">
+					<field name="mandays_ids_37301" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 31001 -->
+				<group col="4" string="Additional Info for ISO 31001" attrs="{'invisible':[('show_31001', '=', False)]}">
+					<field name="accreditation_31001" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_31001" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_31001', '=', False)]}">
+					<field name="site_ids_31001" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_31001', '=', False)]}">
+					<field name="mandays_ids_31001" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISO 21001 -->
+				<group col="4" string="Additional Info for ISO 21001" attrs="{'invisible':[('show_21001', '=', False)]}">
+					<field name="accreditation_21001" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_21001" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_21001', '=', False)]}">
+					<field name="site_ids_21001" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_21001', '=', False)]}">
+					<field name="mandays_ids_21001" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<!-- ISPO -->
+				<group col="4" string="Additional Information for ISPO" attrs="{'invisible':[('show_ispo', '=', False)]}">
+					<field name="accreditation_ispo" options="{'no_create': True, 'no_edit': True}"/>
+					<field name="ea_code_ispo" widget="many2many_tags" options="{'no_create': True, 'no_edit': True}"/>
+				</group>
+				<group string="Informasi Sites" attrs="{'invisible':[('show_ispo', '=', False)]}">
+					<field name="site_ids_ispo" nolabel="1">
+						<tree editable="bottom">
+							<field name="tipe_site"/>
+							<field name="address"/>
+							<field name="effective_emp"/>
+							<field name="total_emp"/>
+						</tree>
+						<form>
+							<group>
+								<field name="tipe_site"/>
+								<field name="address"/>
+								<field name="effective_emp"/>
+								<field name="total_emp"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group string="Informasi Mandays" attrs="{'invisible':[('show_ispo', '=', False)]}">
+					<field name="mandays_ids_ispo" nolabel="1">
+						<tree editable="bottom">
+							<field name="nama_site"/>
+							<field name="stage_1"/>
+							<field name="stage_2"/>
+							<field name="surveilance_1"/>
+							<field name="surveilance_2"/>
+							<field name="recertification" />
+							<field name="surveilance_3"/>
+							<field name="surveilance_4"/>
+							<field name="recertification_2"/>
+							<field name="remarks"/>
+						</tree>
+						<form>
+							<group>
+								<field name="nama_site"/>
+								<field name="stage_1"/>
+								<field name="stage_2"/>
+								<field name="surveilance_1"/>
+								<field name="surveilance_2"/>
+								<field name="recertification" />
+								<field name="surveilance_3"/>
+								<field name="surveilance_4"/>
+								<field name="recertification_2"/>
+								<field name="remarks"/>
+							</group>
+						</form>
+					</field>
+				</group>
+				<group col="4" string="Informasi Kontrak">
+					<field name="tipe_pembayaran" />
+					<field name="upload_npwp" filename="file_name1"/>
+					<field name="is_amendment"/>
+					<field name="upload_contract" filename="file_name" attrs="{'invisible': [('is_amendment', '=', False)]}"/>
+					<field name="contract_type" attrs="{'invisible': [('is_amendment', '=', False)]}"/>
+					<field name="file_name1" invisible="1" />
+					<field name="file_name" invisible="1"/>
+				</group>
+				<notebook>
+					<page string="Lines Audit Request">
+						<group>
+							<field name="line_ids" nolabel="1">
+								<tree editable="bottom">
+									<field name="product_id"/>
+									<field name="audit_tahapan"/>
+									<field name="tahun"/>
+									<field name="price_lama"/>
+									<field name="price_baru"/>
+									<field name="up_value"/>
+									<field name="loss_value"/>
+									<field name="fee"/>
+									<field name="percentage"  widget="percentage"/>
+								</tree>
+								<form>
+									<group>
+										<field name="product_id"/>
+										<field name="audit_tahapan"/>
+										<field name="tahun"/>
+										<field name="price_lama"/>
+										<field name="price_baru"/>
+										<field name="up_value"/>
+										<field name="loss_value"/>
+										<field name="fee"/>
+										<field name="percentage"  widget="percentage"/>
+									</group>
+								</form>
+							</field>
+						</group>
+					</page>
+					<page name="Reference" string="Reference">
+						<group col="4">
+							<field name="iso_reference" attrs="{'invisible': [('show_iso_fields', '=', False)]}"/>
+							<field name="review_reference" widget="many2many_tags" attrs="{'invisible': [('show_iso_fields', '=', False)]}"/>
+							<field name="ispo_reference" attrs="{'invisible': [('show_ispo_fields', '=', False)]}"/>
+							<field name="review_reference_ispo" widget="many2many_tags" attrs="{'invisible': [('show_ispo_fields', '=', False)]}"/>
+							<field name="sales_reference" />
+							<field name="crm_reference" />
+							<field name="show_iso_fields" invisible="1"/>
+							<field name="show_ispo_fields" invisible="1"/>
+						</group>
+					</page>
+				</notebook>
+
+				<footer>
+					<button name="send" string="Confirm" class="btn-primary" type="object" />
+					<button string="Cancel" class="btn-secondary" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+</odoo>

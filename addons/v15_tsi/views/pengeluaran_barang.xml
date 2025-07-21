@@ -1,0 +1,121 @@
+<odoo>
+    <data>
+
+        <record id="seq_pengeluaran_barang" model="ir.sequence">
+            <field name="name">Pengeluaran Barang Sequence</field>
+            <field name="code">tsi.pengeluaran_barang</field>
+            <field name="prefix">PB</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="tsi_pengeluaran_barang_action" model="ir.actions.act_window">
+            <field name="name">Pengeluaran Barang</field>
+            <field name="res_model">tsi.pengeluaran_barang</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- <record id="action_picking_out_tree" model="ir.actions.act_window">
+            <field name="name">Outgoing Shipments</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_picking_tree_inherited_out"/>
+            <field name="domain">[('picking_type_id.code', '=', 'outgoing')]</field>
+            <field name="context">{}</field>
+        </record> -->
+
+
+        <record id="tsi_pengeluaran_barang_view_tree" model="ir.ui.view">
+            <field name="name">tsi.pengeluaran_barang.tree</field>
+            <field name="model">tsi.pengeluaran_barang</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="name_karyawan" />
+                    <field name="tanggal_barang_keluar" />
+                    <field name="state" widget="badge" decoration-success = "state == 'done'" decoration-danger = "state == 'draft'" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_pengeluaran_barang_view_form" model="ir.ui.view">
+            <field name="name">tsi.pengeluaran_barang.form</field>
+            <field name="model">tsi.pengeluaran_barang</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,done" />
+                        <button name="action_create_stock_picking" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'done')]}" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="name_karyawan" />
+                            <field name="tanggal_barang_keluar" />
+                        </group>
+                        <notebook>
+                            <page name="Pengeluaran Barang" string="Order Lines">
+                                <group>
+                                    <field name="lines_barang" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="product_id"/>
+                                            <field name="description"/>
+                                            <field name="quantity"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="description"/>
+                                                <field name="quantity"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- <record id="view_picking_tree_inherited_out" model="ir.ui.view">
+            <field name="name">stock.picking.tree.inherited.out</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="show_fields" invisible="1"/>
+                    <field name="nama_karyawan" />
+                    <field name="tanggal" />
+                </xpath>
+            </field>
+        </record> -->
+
+        <record id="view_picking_form_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//field[@name='picking_type_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath> -->
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="show_fields" invisible="1"/>
+                    <field name="tanggal"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

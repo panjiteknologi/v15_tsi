@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="online_appointment_form" name="ISO Application Form">
+        <t t-call="website.layout">
+
+            <div class="container mb64" id="s2u_online_appointment">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <form action="/tsi_iso_form/submit/" method="post" class="form-horizontal mt32" enctype="multipart/form-data" id="iso_form">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div t-if="error_message" class="alert alert-danger" role="alert">
+                                        <t t-foreach="error_message" t-as="err">
+                                            <t t-esc="err"/>
+                                            <br />
+                                        </t>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="alert alert-success">General Company Information</div>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label class="control-label" for="name">Company Name *</label>
+                                    <div>
+                                        <input type="text" class="form-control" name="company_name" id="company_name" required="true"/>
+                                        
+                                        <!-- <select class="form-control" name="company_name" id="company_name" style="width: 100%">
+                                            <option></option> 
+                                            <t t-foreach="company_names" t-as="company">
+                                                <option t-att-value="company.id"><t t-esc="company.name"/></option>
+                                            </t>
+                                        </select> -->
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label class="control-label" for="name">Office Address *</label>
+                                    <div>
+                                        <input type="text" class="form-control" name="office_address" required="true"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xl-6">
+                                    <label class="control-label" for="name">Invoice Address *</label>
+                                    <div>
+                                        <input type="text" class="form-control" name="invoicing_address" required="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="contact_person">Contact Person *</label>
+                                    <input type="text" class="form-control" name="contact_person" id="contact_person"  required="true"/>
+                                </div>
+                                
+                                <div class="form-group col-xl-6">
+                                    <label for="telepon">Telepon *</label>
+                                    <input type="text" class="form-control" name="telepon" id="telepon" required="true"/>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="jabatan">Jabatan *</label>
+                                    <input type="text" class="form-control" name="jabatan" id="jabatan" required="true"/>
+                                </div>
+                                
+                                <div class="form-group col-xl-6">
+                                    <label for="email">Email *</label>
+                                    <input type="text" class="form-control" name="email" id="email" required="true"/>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="fax">Fax</label>
+                                    <input type="text" class="form-control" name="fax" id="fax"  />
+                                </div>
+                                
+                                <div class="form-group col-xl-6">
+                                    <label for="website">Website *</label>
+                                    <input type="text" class="form-control" name="website" id="website" required="true"/>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="alert alert-success">Scope and Boundaries</div>
+                                </div>
+
+                                <div class="form-group col-xl-6">
+                                    <label for="scope">Scope  *</label>
+                                    <input type="text" class="form-control" name="scope" id="scope" required="true"/>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="boundaries">Boundaries *</label>
+                                    <input type="text" class="form-control" name="boundaries" id="boundaries" required="true"/>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="alert alert-success">Management system standard(s)</div>
+                                </div>
+                        
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label" for="iso_standardx" style="padding-left: 15px;">ISO Standards *</label>
+                                        <div id="fields_permit" class="d-grid grid-template-columns" 
+                                            style="padding-left: 25px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                                            <t t-foreach="iso_standard" t-as="permit">
+                                                <div class="form-check" style="display: flex; align-items: center;">
+                                                    <input class="form-check-input iso-standard-checkbox" type="checkbox" name="iso_standardx" 
+                                                        t-att-id="'iso_standard_' + str(permit.id)" t-att-value="permit.id"/>
+                                                    <label class="form-check-label" t-att-for="'iso_standard_' + str(permit.id)" 
+                                                        style="margin-left: 8px; white-space: nowrap;">
+                                                        <t t-esc="permit.name"/>
+                                                    </label>
+                                                </div>
+                                            </t>
+                                        </div>
+                                        <div id="iso_standard_error" style="color: red; display: none;">
+                                            Please select at least one ISO Standard.
+                                        </div>
+                                        <div style="margin-left: 45px; margin-top: 15px;">
+                                            <input class="form-check-input" type="checkbox" id="iso_standardx_others" name="iso_standardx_others"/>
+                                            <label class="form-check-label" for="iso_standardx_others" style="margin-left: 8px; white-space: nowrap;">Others</label>
+                                            <div class="form-group col-md-3" id="iso_standard_others_input" style="display: none; margin-top: 10px;">
+                                                <input type="text" id="other_standard" name="other_standard" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label" for="certification" style="padding-left: 10px;">Certification Type *</label>
+                                        <div id="certification" class="col-md-12">
+                                            <select class="form-control" name="certification" required="true">
+                                                <option t-attf-value=""></option>
+                                                <option t-attf-value="Single Site">SINGLE SITE</option>
+                                                <option t-attf-value="Multi Site">MULTI SITE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label" for="audit_stage" style="padding-left: 10px;">Audit Stage *</label>
+                                        <div id="audit_stage" class="col-md-12">
+                                            <select class="form-control" name="audit_stage" required="true">
+                                                <option t-attf-value=""></option>
+                                                <option t-attf-value="initial">Initial Assesment</option>
+                                                <option t-attf-value="recertification">Recertification</option>
+                                                <option t-attf-value="transfer_surveilance">Transfer Assesment from Surveilance</option>
+                                                <option t-attf-value="transfer_recert">Transfer Assesment from Recertification</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label" for="remarks" style="padding-left: 10px;">Remarks *</label>
+                                        <div id="remarks" class="col-md-12">
+                                            <input type="text" class="form-control" name="remarks" id="remarks" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label" for="number_of_site" style="padding-left: 10px;">Number of Site *</label>
+                                        <div id="number_of_site" class="col-md-12">
+                                            <input type="number" class="form-control" name="number_of_site" id="number_of_site" required="true"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="container mt-4">
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label" for="personnel_situation" style="padding-left: 10px;">Personnel Situation</label>
+                                        <div id="personnel_situation" class="table-responsive col-md-12" style="padding-left: 10px; overflow-x: auto;">
+                                            <table class="table table-bordered" id="personnelTable" style="table-layout: auto; width: auto;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="white-space: nowrap; padding: 10px;">Type (HO, Factory, etc.)</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Address</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Product/ Process/ Activities</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Total No. of Active Temporary Project Sites (see attachment for detail)</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Total No. of Effective Employees</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Permanent &amp; Contact</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Subcontractor</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Others</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Remark</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Non shift</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Shift 1</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Shift 2</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Shift 3</th>
+                                                        <th style="white-space: nowrap; padding: 10px;">Process Differs Across All Shifts</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="personnelRows">
+                                                    <tr>
+                                                        <td><input type="text" class="form-control input-dynamic" name="type[]" style="width: 100%; min-width: 190px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="address[]" style="width: 100%; min-width: 100px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="product[]" style="width: 100%; min-width: 200px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="total_active_temporary[]" style="width: 100%; min-width: 500px; box-sizing: border-box;" /></td>
+                                                        <td><input type="number" class="form-control input-dynamic" name="total_effective_emp[]" style="width: 100%; min-width: 230px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="permanent[]" style="width: 100%; min-width: 200px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="subcontractor[]" style="width: 100%; min-width: 150px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="others[]" style="width: 100%; min-width: 100px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="remark[]" style="width: 100%; min-width: 100px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="non_shift[]" style="width: 100%; min-width: 100px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="shift_1[]" style="width: 100%; min-width: 100px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="shift_2[]" style="width: 100%; min-width: 100px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="shift_3[]" style="width: 100%; min-width: 100px; box-sizing: border-box;" /></td>
+                                                        <td><input type="text" class="form-control input-dynamic" name="process[]" style="width: 100%; min-width: 230px; box-sizing: border-box;" /></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <button type="button" id="addRow" class="btn btn-primary mb-3">Add Row</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="col-lg-12">
+                                    <div class="alert alert-success">Personnel Situation</div>
+                                </div>
+                                
+                                <div class="container mt-5">
+                                    <form id="dynamic-form">
+                                        <div id="input-container">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="type[]">Type (HO, Factory, etc.)</label>
+                                                    <input type="text" class="form-control" name="type[]" />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="others[]">Others</label>
+                                                    <input type="text" class="form-control" name="others[]" />
+                                                </div>
+                                                
+                                                <div class="form-group col-md-6">
+                                                    <label for="address[]">Address</label>
+                                                    <input type="text" class="form-control" name="address[]" />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="remark[]">Remark</label>
+                                                    <input type="text" class="form-control" name="remark[]" />
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="product[]">Product/ Process/ Activities</label>
+                                                    <input type="text" class="form-control" name="product[]" />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="non_shift[]">Non shift</label>
+                                                    <input type="text" class="form-control" name="non_shift[]" />
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="total_active_temporary[]">Total No. of Active Temporary Project Sites</label>
+                                                    <input type="text" class="form-control" name="total_active_temporary[]" />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="shift_1[]">Shift 1</label>
+                                                    <input type="text" class="form-control" name="shift_1[]" />
+                                                </div>
+                                                
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="total_effective_emp[]">Total No. of Effective Employees</label>
+                                                    <input type="text" class="form-control" name="total_effective_emp[]" />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="shift_2[]">Shift 2</label>
+                                                    <input type="text" class="form-control" name="shift_2[]" />
+                                                </div>
+                                                
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="permanent[]">Permanent &amp; Contact</label>
+                                                    <input type="text" class="form-control" name="permanent[]" />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="shift_3[]">Shift 3</label>
+                                                    <input type="text" class="form-control" name="shift_3[]" />
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="subcontractor[]">Subcontractor</label>
+                                                    <input type="text" class="form-control" name="subcontractor[]" />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="process[]">Process Differs Across All Shifts</label>
+                                                    <input type="text" class="form-control" name="process[]" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" id="add-row">Add Row</button>
+                                    </form>
+                                </div> -->
+
+
+                                <div class="form-group col-md-6">
+                                    <label for="outsourced_activity">Outsourced Activity</label>
+                                    <input type="text" class="form-control" name="outsourced_activity" id="outsourced_activity" />
+                                </div>
+
+
+                                
+                                <div class="col-lg-12">
+                                    <div class="alert alert-success">Please complete information about maturity of your management system</div>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="start_of_implementation">Start of Implementation</label>
+                                    <input type="text" class="form-control" name="start_of_implementation" id="start_of_implementation" />
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                    <label for="use_of_consultants" class="form-label">Use of Consultants</label>
+                                    <div style="display: flex;">
+                                        <div class="form-check" style="margin-right: 15px;">
+                                            <input type="radio" id="use_of_consultants_yes" name="use_of_consultants" value="YES" class="form-check-input" />
+                                            <label for="use_of_consultants_yes" class="form-check-label">YES</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="use_of_consultants_no" name="use_of_consultants" value="NO" class="form-check-input" />
+                                            <label for="use_of_consultants_no" class="form-check-label">NO</label>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="use_of_consultants_input" name="use_of_consultants_input" style="display: none;" class="form-control mt-2" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="certified_system" class="form-label">Certified System</label>
+                                    <div style="display: flex;">
+                                        <div class="form-check" style="margin-right: 15px;">
+                                            <input type="radio" id="certified_system_yes" name="certified_system" value="YES" class="form-check-input" />
+                                            <label for="certified_system_yes" class="form-check-label">YES</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="certified_system_no" name="certified_system" value="NO" class="form-check-input" />
+                                            <label for="certified_system_no" class="form-check-label">NO</label>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="certified_system_input" name="certified_system_input" style="display: none;" class="form-control mt-2" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="other_system">Other System</label>
+                                    <input type="text" class="form-control" name="other_system" id="other_system" />
+                                </div>
+
+
+                                <div class="col-lg-12">
+                                    <div class="alert alert-success">Integrated Audit</div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="integrated_audit" class="form-label">Integrated Audit</label>
+                                    <div style="display: flex;">
+                                        <div class="form-check" style="margin-right: 15px;">
+                                            <input type="radio" id="integrated_audit_yes" name="integrated_audit" value="YES" class="form-check-input" />
+                                            <label for="integrated_audit_yes" class="form-check-label">YES</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="integrated_audit_no" name="integrated_audit" value="NO" class="form-check-input" />
+                                            <label for="integrated_audit_no" class="form-check-label">NO</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group hide col-md-6" id="management_review" style="display: none;">
+                                    <label class="control-label" for="management_review" style="padding-left: 10px;">Management Review</label>
+                                    <div id="management_review" class="col-md-12">
+                                        <select class="form-control" name="management_review">
+                                            <option t-attf-value=""></option>
+                                            <option t-attf-value="YES">YES</option>
+                                            <option t-attf-value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group hide col-md-6" id="manual" style="display: none;">
+                                    <label class="control-label" for="manual" style="padding-left: 10px;">Manual</label>
+                                    <div id="manual" class="col-md-12">
+                                        <select class="form-control" name="manual">
+                                            <option t-attf-value=""></option>
+                                            <option t-attf-value="YES">YES</option>
+                                            <option t-attf-value="PARTIAL">PARTIAL</option>
+                                            <option t-attf-value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group hide col-md-6" id="internal_audit" style="display: none;">
+                                    <label class="control-label" for="internal_audit" style="padding-left: 10px;">Internal Audit</label>
+                                    <div id="internal_audit" class="col-md-12">
+                                        <select class="form-control" name="internal_audit">
+                                            <option t-attf-value=""></option>
+                                            <option t-attf-value="YES">YES</option>
+                                            <option t-attf-value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group hide col-md-6" id="risk_opportunity_management" style="display: none;">
+                                    <label class="control-label" for="risk_opportunity_management" style="padding-left: 10px;">Risk &amp; Opportunity Management</label>
+                                    <div id="risk_opportunity_management" class="col-md-12">
+                                        <select class="form-control" name="risk_opportunity_management">
+                                            <option t-attf-value=""></option>
+                                            <option t-attf-value="YES">YES</option>
+                                            <option t-attf-value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group hide col-md-6" id="responsibilities" style="display: none;">
+                                    <label class="control-label" for="responsibilities" style="padding-left: 10px;">Responsibilities</label>
+                                    <div id="responsibilities" class="col-md-12">
+                                        <select class="form-control" name="responsibilities">
+                                            <option t-attf-value=""></option>
+                                            <option t-attf-value="YES">YES</option>
+                                            <option t-attf-value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group hide col-md-6" id="procedures" style="display: none;">
+                                    <label class="control-label" for="procedures" style="padding-left: 10px;">Procedures</label>
+                                    <div id="procedures" class="col-md-12">
+                                        <select class="form-control" name="procedures">
+                                            <option t-attf-value=""></option>
+                                            <option t-attf-value="YES">YES</option>
+                                            <option t-attf-value="PARTIAL">PARTIAL</option>
+                                            <option t-attf-value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group hide col-md-6" id="work_instructions" style="display: none;">
+                                    <label class="control-label" for="work_instructions" style="padding-left: 10px;">Work Instructions</label>
+                                    <div id="work_instructions" class="col-md-12">
+                                        <select class="form-control" name="work_instructions">
+                                            <option t-attf-value=""></option>
+                                            <option t-attf-value="YES">YES</option>
+                                            <option t-attf-value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="margin-top: 50px">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>    
+        </t>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                const checkboxes = document.querySelectorAll('.iso-standard-checkbox');
+                const othersCheckbox = document.getElementById('iso_standardx_others');
+                const errorMessage = document.getElementById('iso_standard_error');
+
+                function getCheckedValues() {
+                    let checkedValues = [];
+                    
+                    checkboxes.forEach(function (checkbox) {
+                        if (checkbox.checked) {
+                            checkedValues.push(checkbox.value);
+                        }
+                    });
+
+                    return checkedValues;
+                }
+
+                const form = document.querySelector('form'); 
+
+                othersCheckbox.addEventListener('change', function () {
+                    if (othersCheckbox.checked) {
+                        errorMessage.style.display = 'none'; 
+                    }
+                });
+                
+                form.addEventListener('submit', function (e) {
+                    const checkedValues = getCheckedValues();
+                    
+                    if (checkedValues.length === 0 &amp; !othersCheckbox.checked) {
+                        e.preventDefault(); 
+                        alert("Please select at least one ISO Standard.");
+                    } else {
+                        console.log("Checkbox yang dicentang:", checkedValues);
+                    }
+                });
+
+
+                function toggleVisibility() {
+                    //Standard others
+                    const othersCheckbox = document.getElementById('iso_standardx_others');
+                    const othersInputContainer = document.getElementById('iso_standard_others_input');
+                    const othersInput = document.getElementById('other_standard');
+
+                    othersCheckbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            othersInputContainer.style.display = 'block';
+                        } else {
+                            othersInputContainer.style.display = 'none';
+                            othersInput.value = '';
+                        }
+                    });
+                     // Validasi input standard others
+                    const form = document.querySelector('form');
+                    form.addEventListener('submit', function(e) {
+                        if (othersCheckbox.checked &amp; othersInput.value.trim() === '') {
+                            e.preventDefault();
+                            alert("Please fill out the 'Others' field.");
+                            othersInput.focus();
+                        }
+                    });
+
+                    // Use of Consultants
+                    const useOfConsultantsYes = document.getElementById('use_of_consultants_yes').checked;
+                    const useOfConsultantsNo = document.getElementById('use_of_consultants_no').checked;
+                    const useOfConsultantsInput = document.getElementById('use_of_consultants_input');
+
+                    if (useOfConsultantsYes) {
+                        useOfConsultantsInput.style.display = 'block';
+                    } else if (useOfConsultantsNo) {
+                        useOfConsultantsInput.style.display = 'none';
+                        useOfConsultantsInput.value = '';
+                    }
+
+                    // Certified System
+                    const certifiedSystemYes = document.getElementById('certified_system_yes').checked;
+                    const certifiedSystemNo = document.getElementById('certified_system_no').checked;
+                    const certifiedSystemInput = document.getElementById('certified_system_input');
+                    
+                    if (certifiedSystemYes) {
+                        certifiedSystemInput.style.display = 'block';
+                    } else if (certifiedSystemNo) {
+                        certifiedSystemInput.style.display = 'none';
+                        certifiedSystemInput.value = '';
+                    }
+
+                    // Integrated Audit
+                    const integratedAuditYes = document.getElementById('integrated_audit_yes').checked;
+                    const integratedAuditNo = document.getElementById('integrated_audit_no').checked;
+                    const integratedAuditSections = [
+                        'management_review',
+                        'manual',
+                        'internal_audit',
+                        'risk_opportunity_management',
+                        'responsibilities',
+                        'procedures',
+                        'work_instructions'
+                    ];
+                    
+                    integratedAuditSections.forEach(function(id) {
+                        const section = document.getElementById(id);
+                        if (section) {
+                            if (integratedAuditYes) {
+                                section.style.display = 'block';
+                            } else if (integratedAuditNo) {
+                                section.style.display = 'none';
+
+                                const selectElement = section.querySelector('select');
+                                if (selectElement) {
+                                    selectElement.value = '';
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                const radioButtons = document.querySelectorAll('input[type="radio"]');
+                radioButtons.forEach(function (radio) {
+                    radio.addEventListener('change', toggleVisibility);
+                });
+
+                toggleVisibility();
+
+            });  
+
+            
+            document.getElementById('addRow').addEventListener('click', function() {
+                const tableBody = document.getElementById('personnelRows');
+                const newRow = document.createElement('tr');
+
+                const columns = [
+                    'type[]', 'address[]', 'product[]', 'total_active_temporary[]',
+                    'total_effective_emp[]', 'permanent[]', 'subcontractor[]', 'others[]',
+                    'remark[]', 'non_shift[]', 'shift_1[]', 'shift_2[]', 'shift_3[]', 'process[]'
+                ];
+
+                columns.forEach(function(column) {
+                    const newCell = newRow.insertCell();
+                    const input = document.createElement('input');
+                    input.type = column === 'total_effective_emp[]' ? 'number' : 'text';
+                    input.className = 'form-control input-dynamic';
+                    input.name = column;
+                    input.style.width = '100%';
+                    input.style.minWidth = '150px';
+                    input.style.boxSizing = 'border-box';
+                    newCell.appendChild(input);
+                });
+
+                tableBody.appendChild(newRow);
+
+                adjustInputWidth();
+            });
+
+            function adjustInputWidth() {
+                var inputs = document.querySelectorAll('.input-dynamic');
+                inputs.forEach(function(input) {
+                    var tempSpan = document.createElement('span');
+                    tempSpan.style.visibility = 'hidden';
+                    tempSpan.style.whiteSpace = 'pre';
+                    tempSpan.style.font = getComputedStyle(input).font;
+                    tempSpan.textContent = input.value || input.placeholder;
+                    document.body.appendChild(tempSpan);
+                    input.style.width = (tempSpan.offsetWidth + 10) + 'px'; 
+                    document.body.removeChild(tempSpan);
+                });
+            }
+
+            document.addEventListener('input', function(event) {
+                if (event.target.classList.contains('input-dynamic')) {
+                    adjustInputWidth();
+                }
+            });
+
+            window.addEventListener('load', adjustInputWidth);
+
+            <!-- $(document).ready(function() {
+                $('#company_name').select2({
+                    placeholder: "Search for a company", 
+                    allowClear: true,                    
+                    minimumInputLength: 1                
+                });
+            }); -->
+
+            <!-- document.addEventListener('DOMContentLoaded', function() {
+                const addButton = document.getElementById('add-row');
+                const container = document.getElementById('input-container');
+                const templateRow = container.querySelector('.template-row');
+                
+                addButton.addEventListener('click', function() {
+                    // Clone the template row
+                    const newRow = templateRow.cloneNode(true);
+                    
+                    // Clear the values of the new row
+                    const inputs = newRow.querySelectorAll('input');
+                    inputs.forEach(input => input.value = '');
+                    
+                    // Make IDs and names unique
+                    inputs.forEach(input => {
+                        input.id = input.id.replace('[]', `_${Date.now()}`);
+                        input.name = input.name.replace('[]', `_${Date.now()}`);
+                    });
+                    
+                    // Remove existing remove button if present
+                    const existingRemoveButton = newRow.querySelector('.btn-remove');
+                    if (existingRemoveButton) {
+                        existingRemoveButton.remove();
+                    }
+                    
+                    // Add a remove button to the new row
+                    const removeButton = document.createElement('button');
+                    removeButton.type = 'button';
+                    removeButton.className = 'btn btn-danger btn-remove';
+                    removeButton.textContent = 'Remove Row';
+                    removeButton.addEventListener('click', function() {
+                        newRow.remove();
+                    });
+                    
+                    newRow.appendChild(removeButton);
+                    
+                    // Append the new row to the container
+                    container.appendChild(newRow);
+                });
+            }); -->
+            
+        </script>
+    </template>
+
+
+    <template id="online_appointment_form_success" name="Application Form Successfully Submitted">
+        <t t-call="website.layout">
+            <div id="wrap" class="d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="col-md-12 text-center">
+                        <div class="alert alert-success" style="margin-top: 150px;">
+                            Application Form submitted.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="tsi_iso_form" name="ISO Application Form">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'isoform'"/>
+
+            <div id="wrap" class="oe_structure oe_empty"/>
+        </t>
+    </template>
+
+    <template id="tsi_ispo_form" name="ISPO Application Form">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'ispoform'"/>
+
+            <div id="wrap" class="oe_structure oe_empty"/>
+        </t>
+    </template>
+
+    <record id="feature_tsi_iso_form" model="website.configurator.feature">
+        <field name="name">About Us</field>
+        <field name="description">Info and stats about your company</field>
+        <field name="iap_page_code">about_us</field>
+        <field name="sequence">1</field>
+        <field name="page_view_id" ref="tsi_iso_form"/>
+        <field name="icon">fa-building</field>
+        <field name="menu_company">True</field>
+        <field name="menu_sequence">50</field>
+        <field name="feature_url">/tsi-iso-form</field>
+    </record>
+
+</odoo>

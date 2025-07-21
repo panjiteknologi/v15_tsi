@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="action_audit_system" model="ir.actions.server">
+            <field name="name">Open Audit System</field>
+            <field name="model_id" ref="model_tsi_audit_system"/>
+            <field name="state">code</field>
+            <field name="code">action = model.action_open_audit_system()</field>
+        </record>
+    </data>
+</odoo>

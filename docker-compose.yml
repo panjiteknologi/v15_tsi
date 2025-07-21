@@ -1,0 +1,31 @@
+version: '2'
+services:
+  web:
+    image: odoo:15
+    depends_on:
+      - db
+    ports:
+      - "80:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    # command: odoo -u all -d odoo1
+    command: odoo -u v15_tsi -d odoo1
+    # command: odoo -u addons_sekolah -d odoo1
+    # command: odoo -u v15_itsec -d odoo1
+    # command: odoo -u contact_client -d db
+    # command: odoo -u contact_associate -d db
+    # command: odoo -u contact_franchise -d db
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+volumes:
+  odoo-web-data:
+  odoo-db-data:

@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="action_auditor_schedule" model="ir.actions.server">
+            <field name="name">Open Auditor Schedule</field>
+            <field name="model_id" ref="model_tsi_auditor_schedule"/>
+            <field name="state">code</field>
+            <field name="code">action = model.action_open_auditor_schedule()</field>
+        </record>
+    </data>
+</odoo>
